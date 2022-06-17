@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+import 'package:save_water/widgets/image_card.dart';
+
+class waterMenu extends StatefulWidget {
+  const waterMenu({Key? key}) : super(key: key);
+
+  @override
+  State<waterMenu> createState() => _waterMenuState();
+}
+
+class _waterMenuState extends State<waterMenu> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Water Consumption Tracker',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontSize: 18
+            ),
+          ),
+          backgroundColor: Color(0xFF4B39EF),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/home/water/manual');
+                  },
+                  child: ImageCard(
+                    title: 'Manual Tracker',
+                    description: 'Track your water consumption by filling in the questionnaire and compare it with your local usage. Save more water and money!',
+                    image: AssetImage('assets/images/tracker.png'),
+                  )
+              ),
+              InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/home/water/scan');
+                  },
+                  child: ImageCard(
+                    title: 'Scan Tracker',
+                    description: 'Track your water usage by scanning your water bill and compare it with your local usage. Save more water and money!',
+                    image: AssetImage('assets/images/scan.png'),
+                  )
+              ),
+            ],
+          ),
+        )
+    );
+  }
+}
