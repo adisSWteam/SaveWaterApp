@@ -33,7 +33,7 @@ class _manualReworkState extends State<manualRework> {
         topimg: 'assets/ind_assets/shower.png'
     ),
     Question(
-        question: 'How many times in a day, do you shower?',
+        question: 'How many times do you shower?',
         options: ['once', 'twice', 'thrice', '4 times'],
         values: [1, 2, 3, 4],
         cals: 35.0,
