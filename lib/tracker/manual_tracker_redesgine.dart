@@ -33,7 +33,7 @@ class _manualReworkState extends State<manualRework> {
         topimg: 'assets/ind_assets/shower.png'
     ),
     Question(
-        question: 'How many times do you shower?',
+        question: 'How many times in a day, do you shower?',
         options: ['once', 'twice', 'thrice', '4 times'],
         values: [1, 2, 3, 4],
         cals: 35.0,
@@ -249,7 +249,7 @@ class _manualReworkState extends State<manualRework> {
                         indexs++;
                       } else {
                         print(prResults);
-                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ResultPage(result_: result)), ModalRoute.withName('/home/water'));
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ResultPage(result_: result)), (route) => route.isFirst);
                       }
                       opChosen = 4;
                     } else {
@@ -293,7 +293,6 @@ class ResultPage extends StatelessWidget {
   final double result_;
 
   ResultPage({required this.result_});
-
 
   String overunder(){
     if(result_ > 114){

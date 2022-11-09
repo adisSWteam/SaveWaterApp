@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:save_water/authentication/authentication.dart';
 import 'package:save_water/home/home_page.dart';
+import 'package:save_water/home/home_screen.dart';
 
 class AuthGate extends StatelessWidget {
   const AuthGate({Key? key}) : super(key: key);
@@ -17,7 +18,8 @@ class AuthGate extends StatelessWidget {
         }
 
         // Render application if signed in
-        return HomePage(user: snapshot.data!);
+        // return HomePage(user: snapshot.data!);
+        return HomeScreen(user: snapshot.data!);
       },
     );
   }
