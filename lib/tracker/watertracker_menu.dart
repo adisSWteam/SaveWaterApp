@@ -21,6 +21,14 @@ class _waterMenuState extends State<waterMenu> {
                 fontSize: 18
             ),
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.info, color: Colors.white),
+              onPressed: (){
+                Navigator.pushNamed(context, '/home/thanks');
+              },
+            ),
+          ],
           backgroundColor: Color(0xFF4B39EF),
           centerTitle: true,
         ),

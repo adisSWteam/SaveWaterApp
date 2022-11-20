@@ -16,8 +16,10 @@ import 'package:save_water/tracker/watertracker_menu.dart';
 //import 'package:save_water/tracker/manual_tracker_v2.dart';
 import 'package:save_water/tracker/manual_tracker_redesgine.dart';
 import 'package:save_water/scannable_tracker/scannable_tracker.dart';
+import 'package:save_water/acknolage/acknolage.dart';
 
 import 'package:save_water/theme/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +43,7 @@ Future<void> main() async {
         '/home/event/international': (context) => const interEvents(),
         '/home/event/local': (context) => const localEvents(),
         '/home/gallery': (context) => const Gallery(),
+        '/home/thanks' : (context) => const thanks(),
       },
       color: primaryColor,
     ),
