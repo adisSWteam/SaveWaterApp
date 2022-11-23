@@ -51,7 +51,7 @@ android {
     defaultConfig {
         applicationId "com.adis.save_water"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
