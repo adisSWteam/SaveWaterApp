@@ -17,7 +17,7 @@ class _historyState extends State<history> {
   List results = [];
 
   void getData() async {
-    mongo.Db db = await mongo.Db.create('mongodb+srv://saveWaterDB:asdc12@cluster0.oz1qubi.mongodb.net/test?retryWrites=true&w=majority');
+    mongo.Db db = await mongo.Db.create('mongodb+srv://saveWaterDB:asdc12@cluster0.9ebxgrp.mongodb.net/test?retryWrites=true&w=majority');
     await db.open();
     final water = db.collection('waterData');
     final find = await water.find({"uid" : uid}).toList();
