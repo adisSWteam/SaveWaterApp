@@ -36,36 +36,39 @@ class _historyState extends State<history> {
   }
 
   Widget resultOut(res){
-    return InkWell(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultPage(result_: res[0])));
-      },
-      child: Card(
-        elevation: 5,
-        margin: const EdgeInsets.fromLTRB(16, 14, 16, 14),
-        child: Padding(
-        padding: EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "${(res[0]/3.785).round()}",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20
+    return OverflowBox(
+      maxWidth: double.infinity,
+      child: InkWell(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultPage(result_: res[0])));
+        },
+        child: Card(
+          elevation: 5,
+          margin: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+          child: Padding(
+          padding: EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "${(res[0]/3.785).round()}",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20
+                  ),
                 ),
-              ),
-              SizedBox(width: 5,),
-              Text(
-                "GPD recorded on ${res[1]}",
-                style: TextStyle(
-                  fontSize: 18
-                ),
-              )
-            ],
+                SizedBox(width: 5,),
+                Text(
+                  "GPD recorded on ${res[1]}",
+                  style: TextStyle(
+                    fontSize: 18
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      )
+        )
+      ),
     );
   }
 

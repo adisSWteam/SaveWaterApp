@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart' as google_ml_kit;
 import 'package:image_picker/image_picker.dart';
-// import 'dart:io';
-
 import 'package:save_water/theme/theme.dart';
 import 'package:save_water/scannable_tracker/result_page.dart';
-import 'package:save_water/widgets/normal_elevated_button.dart';
-// import 'package:save_water/widgets/weird_button.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 class ScannableTracker extends StatefulWidget {
   const ScannableTracker({Key? key}) : super(key: key);
@@ -19,6 +18,7 @@ class _ScannableTrackerState extends State<ScannableTracker> {
   bool textScanning = false;
   XFile? imageFile;
   String scannedText = "";
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   void button1OnPressed() {
     getImage(ImageSource.gallery);
@@ -47,13 +47,6 @@ class _ScannableTrackerState extends State<ScannableTracker> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (textScanning) const CircularProgressIndicator(),
-                  // if (!textScanning && imageFile == null)
-                  //   Container(
-                  //     width: 300,
-                  //     height: 300,
-                  //     color: Colors.white,
-                  //   ),
-                  // if (imageFile != null) Image.file(File(imageFile!.path)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -89,38 +82,6 @@ class _ScannableTrackerState extends State<ScannableTracker> {
                   const SizedBox(
                     height: 160,
                   ),
-                  // Container(
-                  //   // child: Text(
-                  //   //   scannedText,
-                  //   //   style: TextStyle(fontSize: 20),
-                  //   child: Card(
-                  //     elevation: 15,
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(15.0),
-                  //     ),
-                  //     child: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.stretch,
-                  //       children: [
-                  //         Padding(
-                  //           padding: const EdgeInsets.all(12),
-                  //           child: Text(
-                  //             "Total units:",
-                  //             style: TextStyle(
-                  //               fontWeight: FontWeight.bold,
-                  //               fontSize: 22,
-                  //               color: primaryColor,
-                  //             ),
-                  //           ),
-                  //         ),
-                  //         Padding(
-                  //           padding: const EdgeInsets.all(12),
-                  //           child: Text(scannedText,
-                  //               style: TextStyle(fontWeight: FontWeight.w500)),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ))),
     );
@@ -129,9 +90,6 @@ class _ScannableTrackerState extends State<ScannableTracker> {
   void processImage() {
     scannedText.runes.forEach((word) {
       print(word);
-      // if (word == "in"||word == "in"||word == "in"){
-
-      // }
     });
   }
 
@@ -142,88 +100,119 @@ class _ScannableTrackerState extends State<ScannableTracker> {
         textScanning = true;
         imageFile = pickedImage;
         getRecognisedText(pickedImage);
+        await Future.delayed(const Duration(milliseconds: 900));
       }
     } catch (e) {
       textScanning = false;
       imageFile = null;
       scannedText = "Error occured while scanning";
     }
+    print("Here 1st");
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => ScanTrackerResultPage(
-                scannedText: scannedText,
-              )),
+            scannedText: scannedText,
+          )),
     );
+  }
+
+  void getLitres(double price) async {
+    final double greenBandPricePerM3 = 7.84;
+    final double redBandPricePerM3 = 10.41;
+    final double greenBandPriceLimit;
+
+    double units = 0;
+    double temp;
+
+    greenBandPriceLimit = (0.7 * greenBandPricePerM3) * 30;
+
+    if (price > greenBandPriceLimit) {
+      temp = price - greenBandPriceLimit;
+      units += greenBandPriceLimit / greenBandPricePerM3;
+      units += temp / redBandPricePerM3;
+    } else {
+      units += price / greenBandPricePerM3;
+    }
+
+    units *= 1000;
+    dataBaseAdd(units);
+    scannedText = await units.round().toString();
+    print(units);
+    print(scannedText);
+  }
+
+  void dataBaseAdd(double result) async{
+    mongo.Db db = await mongo.Db.create('mongodb+srv://saveWaterDB:asdc12@cluster0.9ebxgrp.mongodb.net/test?retryWrites=true&w=majority');
+    await db.open();
+    final water = db.collection('waterData');
+    final find = await water.find({"uid" : uid}).toList();
+    DateFormat dateFormat = DateFormat("dd-MM-yyyy");
+    String date = dateFormat.format(DateTime.now());
+    if(find.length == 0){
+      await water.insertOne({'uid': uid, 'result': [[(result).round(), date]]});
+    }else{
+      //List us = await water.find({'uid': uid}).toList();
+      List waterUseList = find[0]['result'];
+      List newAdd = [];
+      bool dateEx = false;
+
+      for(int j = 0; j<waterUseList.length; j++){
+        if(waterUseList[j][1] == date){
+          dateEx = true;
+        }
+      }
+      if(dateEx == false){
+        waterUseList.add([(result * 3.785).round(), date]);
+        await water.updateOne(mongo.where.eq('uid', uid), mongo.modify.set('result', waterUseList));
+      }else{
+        for(int i=0; i<waterUseList.length; i++){
+          if(waterUseList[i][1] == date){
+            newAdd.add([(result).round(), date]);
+          }else{
+            newAdd.add(waterUseList[i]);
+          }
+        }
+        await water.updateOne(mongo.where.eq('uid', uid), mongo.modify.set('result', newAdd));
+      }
+
+    }
+    print("done");
   }
 
   void getRecognisedText(XFile image) async {
     final inputImage = google_ml_kit.InputImage.fromFilePath(image.path);
     final textDetector = google_ml_kit.GoogleMlKit.vision.textRecognizer();
     google_ml_kit.RecognizedText recognisedText =
-        await textDetector.processImage(inputImage);
+    await textDetector.processImage(inputImage);
     await textDetector.close();
     scannedText = "";
-    // int cnt = 0;
-    // double high1 = 0, high2 = 0;
+    String reformatStr = "";
 
     for (google_ml_kit.TextBlock block in recognisedText.blocks) {
       for (google_ml_kit.TextLine line in block.lines) {
         String text = line.text.trim();
         List<String> textList = text.split(" ");
 
-        if (textList[0] == "AED") {
-          double amt = double.parse(textList[1]);
-          scannedText = amt.toString() + " Dhs";
+        if(textList[0] == "AED"){
+          print("Found");
+          for(int i=0; i < textList[1].length; i++){
+            if (textList[1][i] != ","){
+              reformatStr+=textList[1][i];
+            }
+          }
+          double money = double.parse(reformatStr);
+          print(money);
+          getLitres(money);
         }
-
-        /*
-        //     // Removes all commas so that it doesn't mess up calculation
-        //     String text = line.text.trim().replaceAll(",", "");
-        //     print(text + "\n");
-
-        //     // Checks if text is not spotted
-        //     if (cnt == 0) {
-        //       // Checks if the text is in the hint texts
-        //       if (text == "Total (before VAT)" ||
-        //           text == "TOTAL INCL" ||
-        //           text == "VAT at 5%") {
-        //         cnt++;
-        //         print(cnt);
-        //       }
-
-        //       // Checks if it's a double + contains "." + if val less than 1000
-        //     } else if (double.tryParse(text) != null &&
-        //         text.contains(".") &&
-        //         double.parse(text) < 1000) {
-        //       cnt++;
-        //       print(cnt);
-        //       if (cnt == 4) {
-        //         scannedText = text + "units!";
-        //       }
-        //     }
-
-        /* Simple Logic
-        // if (double.tryParse(text) != null && text.contains(".")) {
-        //   if (double.parse(text) > high1) {
-        //     high2 = high1;
-        //     high1 = double.parse(text);
-        //   }
-        // }
-        */
-        */
       }
     }
+
+
     if (scannedText == "") {
       scannedText = "Unable to recognize text";
     }
-    // scannedText = (high1 - high2).toString() + "units!";
 
     textScanning = false;
-    setState(() {});
-    @override
-    void initState() {
-      super.initState();
-    }
   }
 }

@@ -1,4 +1,4 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:save_water/theme/theme.dart';
 
 class ScanTrackerResultPage extends StatelessWidget {
@@ -23,46 +23,46 @@ class ScanTrackerResultPage extends StatelessWidget {
           children: <Widget>[
             Center(
                 child: Image.asset(
-              'assets/ind_assets/whale.png',
-              height: 100,
-              width: 100,
-              fit: BoxFit.contain,
-            )),
+                  'assets/ind_assets/whale.png',
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.contain,
+                )),
             Center(
                 child: Padding(
-              padding: EdgeInsets.all(14),
-              child: Column(
-                children: [
-                  Text(
-                    'Your money spend',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.lightBlueAccent,
-                        fontFamily: 'Capriola'),
+                  padding: EdgeInsets.all(14),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Total litres of water',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.lightBlueAccent,
+                            fontFamily: 'Capriola'),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'used this month is:',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.lightBlueAccent,
+                            fontFamily: 'Capriola'),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        scannedText + " litres",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.lightBlueAccent,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    'on water is:',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.lightBlueAccent,
-                        fontFamily: 'Capriola'),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    scannedText,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.lightBlueAccent,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            )),
+                )),
             Image(
               image: AssetImage('assets/ind_assets/drop_hold.png'),
               height: 100,
