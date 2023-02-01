@@ -207,12 +207,9 @@ class _ScannableTrackerState extends State<ScannableTracker> {
         }
       }
     }
-
-
     if (scannedText == "") {
       scannedText = "Unable to recognize text";
     }
-
     textScanning = false;
   }
 }

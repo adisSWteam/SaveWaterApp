@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:save_water/tracker/questionsV2.dart';
-import 'package:save_water/widgets/alert.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 
