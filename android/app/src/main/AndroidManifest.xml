@@ -3,7 +3,7 @@
     <application
         android:label="ADIS Save Water"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon"
+        android:icon="@mipmap/ic_launcher"
         android:versionCode="1"
         android:versionName="1.0.0">
         <activity
