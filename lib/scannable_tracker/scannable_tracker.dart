@@ -137,7 +137,7 @@ class _ScannableTrackerState extends State<ScannableTracker> {
 
     units *= 1000;
     dataBaseAdd(units);
-    scannedText = await units.round().toString();
+    scannedText = units.round().toString();
     print(units);
     print(scannedText);
   }

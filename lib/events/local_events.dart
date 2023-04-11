@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
@@ -25,7 +27,7 @@ class _localEventsState extends State<localEvents> {
   @override
   void initState(){
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) => getData());
+    WidgetsBinding.instance.addPostFrameCallback((_) => getData());
   }
 
   Widget display(events){

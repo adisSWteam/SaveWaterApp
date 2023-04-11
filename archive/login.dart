@@ -81,7 +81,7 @@ class _LoginState extends State<Login> {
                 children: [
                   const SizedBox(width: 40),
                   // ignore: deprecated_member_use
-                  FlatButton(
+                  TextButton(
                     onPressed: () {},
                     child: const Padding(
                       padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -93,9 +93,11 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    color: Colors.indigo[700],
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      foregroundColor: Colors.indigo[700],
+                    ),
                   ),
                   const SizedBox(width: 20),
                   TextButton(

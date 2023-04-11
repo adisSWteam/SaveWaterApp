@@ -138,7 +138,7 @@ class _SignState extends State<Sign> {
                   ),
                   const SizedBox(height: 20),
                   // ignore: deprecated_member_use
-                  FlatButton(
+                  TextButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         dynamic result = await _auth.signUpWithEmailAndPassword(
@@ -164,9 +164,11 @@ class _SignState extends State<Sign> {
                         ),
                       ),
                     ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    color: Colors.indigo[700],
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      foregroundColor: Colors.indigo[700],
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Text(

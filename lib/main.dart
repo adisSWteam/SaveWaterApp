@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import 'package:google_ml_kit/google_ml_kit.dart';
-import 'package:image_picker/image_picker.dart';
 
 import 'package:save_water/authentication/auth_gate.dart';
-import 'package:save_water/home/home_page.dart';
 import 'package:save_water/home/start_page.dart';
 import 'package:save_water/events/event_menu.dart';
 import 'package:save_water/events/international_events.dart';
@@ -21,7 +18,6 @@ import 'package:save_water/acknolage/acknolage.dart';
 import 'package:save_water/history/history.dart';
 
 import 'package:save_water/theme/theme.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

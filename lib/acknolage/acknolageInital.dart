@@ -1,5 +1,6 @@
+// ignore_for_file: camel_case_types
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_water/home/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -95,7 +96,7 @@ class thanks extends StatelessWidget {
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.001,),
                 Text(
-                  "Utkarsh Gupta\nAbdulla Abdul Jaleel\nAustin Philip\nDevamsh Ajayakumar\nDevarya Ruparelia\nof the Abu Dhabi Indian School - Al Muroor ",
+                  "Bhautik Dhanpal Shetty\nSairama Nikhilesh\nJohan Sebastian\nPedro Mark Fernandes\nKeegan D'Silva\nSpandan Bibek Chakrabarty\nSahal Mohamed\nof the Abu Dhabi Indian School - Al Muroor ",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 13,

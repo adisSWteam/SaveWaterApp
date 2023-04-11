@@ -102,7 +102,7 @@ flutter_native_splash:
 
 # Launcher Icon
 flutter_icons:
-  image_path: "assets/images/waterdrop.png"
+  image_path: "assets/images/appicon.png"
   android: "launcher_icon"
   ios: true
   remove_alpha_ios: true

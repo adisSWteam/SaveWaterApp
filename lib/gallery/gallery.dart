@@ -46,7 +46,7 @@ class _GalleryState extends State<Gallery> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) => getData());
+    WidgetsBinding.instance.addPostFrameCallback((_) => getData());
   }
 
   @override

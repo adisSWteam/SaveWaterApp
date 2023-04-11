@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: camel_case_types, unnecessary_statements
+
 import 'package:flutter/material.dart';
 import 'package:save_water/tracker/questionsV2.dart';
 import 'package:save_water/widgets/alert.dart';
-import 'package:save_water/database/database.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class manualTracker extends StatefulWidget {
   const manualTracker({Key? key}) : super(key: key);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:save_water/theme/theme.dart';
 
 class WeirdButton extends StatelessWidget {
   const WeirdButton({Key? key, required this.onPressed, required this.text})

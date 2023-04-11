@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, unnecessary_statements
+
 import 'package:flutter/material.dart';
 import 'package:save_water/tracker/questionsV2.dart';
 import 'package:save_water/widgets/alert.dart';

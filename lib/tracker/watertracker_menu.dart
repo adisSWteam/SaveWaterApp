@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:save_water/widgets/image_card.dart';
 
+// ignore: camel_case_types
 class waterMenu extends StatefulWidget {
   const waterMenu({Key? key}) : super(key: key);
 
@@ -8,6 +9,7 @@ class waterMenu extends StatefulWidget {
   State<waterMenu> createState() => _waterMenuState();
 }
 
+// ignore: camel_case_types
 class _waterMenuState extends State<waterMenu> {
   @override
   Widget build(BuildContext context) {

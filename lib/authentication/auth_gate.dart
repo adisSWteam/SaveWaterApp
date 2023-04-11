@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:save_water/authentication/authentication.dart';
-import 'package:save_water/home/home_page.dart';
 import 'package:save_water/home/home_screen.dart';
 import 'package:save_water/acknolage/acknolageInital.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +26,7 @@ class _AuthGateState extends State<AuthGate> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) => getState());
+    WidgetsBinding.instance.addPostFrameCallback((_) => getState());
   }
   @override
   Widget build(BuildContext context) {

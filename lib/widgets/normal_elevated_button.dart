@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:save_water/theme/theme.dart';
 
 class NormalElevatedButton extends StatelessWidget {
   const NormalElevatedButton(
@@ -16,8 +15,7 @@ class NormalElevatedButton extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.white,
-            onPrimary: Colors.grey,
+            foregroundColor: Colors.grey, backgroundColor: Colors.white,
             shadowColor: Colors.grey[400],
             elevation: 10,
             shape: RoundedRectangleBorder(

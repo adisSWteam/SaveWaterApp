@@ -1,9 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.save_water">
     <application
-        android:label="Save water"
+        android:label="ADIS Save Water"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/launcher_icon"
+        android:versionCode="1"
+        android:versionName="1.0.0">
         <activity
             android:name=".MainActivity"
             android:exported="true"

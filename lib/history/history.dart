@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,7 +32,7 @@ class _historyState extends State<history> {
   @override
   void initState(){
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) => getData());
+    WidgetsBinding.instance.addPostFrameCallback((_) => getData());
   }
 
   Widget resultOut(res){

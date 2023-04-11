@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
@@ -30,7 +32,7 @@ class _GalleryState extends State<Gallery> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) => getData());
+    WidgetsBinding.instance.addPostFrameCallback((_) => getData());
   }
 
   @override
@@ -71,6 +73,7 @@ class ShowImg extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class mainShow extends StatefulWidget {
   List links;
   mainShow({required this.links});

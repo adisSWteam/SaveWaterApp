@@ -1,7 +1,9 @@
+// ignore_for_file: unnecessary_statements
+
 import 'package:flutter/material.dart';
 import 'package:save_water/tracker/questionsV3.dart';
-import 'package:save_water/widgets/alert.dart';
 
+// ignore: camel_case_types
 class manualRework extends StatefulWidget {
   const manualRework({Key? key}) : super(key: key);
 
@@ -9,6 +11,7 @@ class manualRework extends StatefulWidget {
   State<manualRework> createState() => _manualReworkState();
 }
 
+// ignore: camel_case_types
 class _manualReworkState extends State<manualRework> {
   List<Question> questions = [
     Question(
