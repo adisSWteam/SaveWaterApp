@@ -40,7 +40,7 @@ class thanks extends StatelessWidget {
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/ind_assets/background.png'),
+                image: AssetImage('assets/ind_assets/waterbg.png'),
                 fit: BoxFit.cover)),
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(

@@ -27,7 +27,7 @@ class _StartState extends State<Start> {
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/background.jpg'),
+                image: AssetImage('assets/images/waterbg.png'),
                 fit: BoxFit.cover)),
         child: Stack(
           children: <Widget>[

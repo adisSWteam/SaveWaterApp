@@ -38,7 +38,7 @@ class _eventMenuState extends State<eventMenu> {
                   child: ImageCard(
                     title: 'International Events',
                     description: 'Events happening all over the world',
-                    image: AssetImage('assets/images/waterpollution.png'),
+                    image: AssetImage('assets/images/intl_event.png'),
                   )
                 ),
                 InkWell(
@@ -48,7 +48,7 @@ class _eventMenuState extends State<eventMenu> {
                   child: ImageCard(
                     title: 'Local Events',
                     description: 'Find out about all the events happening in UAE',
-                    image: AssetImage('assets/images/environment.png'),
+                    image: AssetImage('assets/images/local_event.png'),
                   )
                 ),
                 InkWell(
@@ -58,7 +58,7 @@ class _eventMenuState extends State<eventMenu> {
                   child: const ImageCard(
                     title: "Gallery",
                     description: "A collection of fond memories.",
-                    image: AssetImage("assets/images/image.png"),
+                    image: AssetImage("assets/images/gallery.png"),
                   ),
                 )
               ],
