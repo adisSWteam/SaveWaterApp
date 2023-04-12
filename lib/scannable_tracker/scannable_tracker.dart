@@ -43,47 +43,47 @@ class _ScannableTrackerState extends State<ScannableTracker> {
       body: Center(
           child: Container(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (textScanning) const CircularProgressIndicator(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // Choose from gallery button
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (textScanning) const CircularProgressIndicator(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Choose from gallery button
 
-                      InkWell(
-                        onTap: () {
-                          getImage(ImageSource.gallery);
-                        },
-                        child: Ink.image(
-                            image: AssetImage(
-                              "assets/ind_assets/upload_from_gallery.png",
-                            ),
-                            height: 260,
-                            width: 175,
-                            fit: BoxFit.cover),
-                      ),
-                      // Choose from camera button
-                      InkWell(
-                        onTap: () {
-                          getImage(ImageSource.camera);
-                        },
-                        child: Ink.image(
-                            image: AssetImage(
-                              "assets/ind_assets/take_photo.png",
-                            ),
-                            height: 260,
-                            width: 175,
-                            fit: BoxFit.cover),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 160,
-                  ),
-                ],
-              ))),
+              InkWell(
+                onTap: () {
+                  getImage(ImageSource.gallery);
+                },
+                child: Ink.image(
+                    image: AssetImage(
+                      "assets/ind_assets/upload_from_gallery.png",
+                    ),
+                    height: 260,
+                    width: 175,
+                    fit: BoxFit.cover),
+              ),
+              // Choose from camera button
+              InkWell(
+                onTap: () {
+                  getImage(ImageSource.camera);
+                },
+                child: Ink.image(
+                    image: AssetImage(
+                      "assets/ind_assets/take_photo.png",
+                    ),
+                    height: 260,
+                    width: 175,
+                    fit: BoxFit.cover),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 160,
+          ),
+        ],
+      ))),
     );
   }
 
@@ -112,8 +112,8 @@ class _ScannableTrackerState extends State<ScannableTracker> {
       context,
       MaterialPageRoute(
           builder: (context) => ScanTrackerResultPage(
-            scannedText: scannedText,
-          )),
+                scannedText: scannedText,
+              )),
     );
   }
 
@@ -142,40 +142,47 @@ class _ScannableTrackerState extends State<ScannableTracker> {
     print(scannedText);
   }
 
-  void dataBaseAdd(double result) async{
-    mongo.Db db = await mongo.Db.create('mongodb+srv://saveWaterDB:asdc12@cluster0.9ebxgrp.mongodb.net/test?retryWrites=true&w=majority');
+  void dataBaseAdd(double result) async {
+    mongo.Db db = await mongo.Db.create(
+        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
     await db.open();
     final water = db.collection('waterData');
-    final find = await water.find({"uid" : uid}).toList();
+    final find = await water.find({"uid": uid}).toList();
     DateFormat dateFormat = DateFormat("dd-MM-yyyy");
     String date = dateFormat.format(DateTime.now());
-    if(find.length == 0){
-      await water.insertOne({'uid': uid, 'result': [[(result).round(), date]]});
-    }else{
+    if (find.length == 0) {
+      await water.insertOne({
+        'uid': uid,
+        'result': [
+          [(result).round(), date]
+        ]
+      });
+    } else {
       //List us = await water.find({'uid': uid}).toList();
       List waterUseList = find[0]['result'];
       List newAdd = [];
       bool dateEx = false;
 
-      for(int j = 0; j<waterUseList.length; j++){
-        if(waterUseList[j][1] == date){
+      for (int j = 0; j < waterUseList.length; j++) {
+        if (waterUseList[j][1] == date) {
           dateEx = true;
         }
       }
-      if(dateEx == false){
+      if (dateEx == false) {
         waterUseList.add([(result * 3.785).round(), date]);
-        await water.updateOne(mongo.where.eq('uid', uid), mongo.modify.set('result', waterUseList));
-      }else{
-        for(int i=0; i<waterUseList.length; i++){
-          if(waterUseList[i][1] == date){
+        await water.updateOne(mongo.where.eq('uid', uid),
+            mongo.modify.set('result', waterUseList));
+      } else {
+        for (int i = 0; i < waterUseList.length; i++) {
+          if (waterUseList[i][1] == date) {
             newAdd.add([(result).round(), date]);
-          }else{
+          } else {
             newAdd.add(waterUseList[i]);
           }
         }
-        await water.updateOne(mongo.where.eq('uid', uid), mongo.modify.set('result', newAdd));
+        await water.updateOne(
+            mongo.where.eq('uid', uid), mongo.modify.set('result', newAdd));
       }
-
     }
     print("done");
   }
@@ -184,7 +191,7 @@ class _ScannableTrackerState extends State<ScannableTracker> {
     final inputImage = google_ml_kit.InputImage.fromFilePath(image.path);
     final textDetector = google_ml_kit.GoogleMlKit.vision.textRecognizer();
     google_ml_kit.RecognizedText recognisedText =
-    await textDetector.processImage(inputImage);
+        await textDetector.processImage(inputImage);
     await textDetector.close();
     scannedText = "";
     String reformatStr = "";
@@ -194,11 +201,11 @@ class _ScannableTrackerState extends State<ScannableTracker> {
         String text = line.text.trim();
         List<String> textList = text.split(" ");
 
-        if(textList[0] == "AED"){
+        if (textList[0] == "AED") {
           print("Found");
-          for(int i=0; i < textList[1].length; i++){
-            if (textList[1][i] != ","){
-              reformatStr+=textList[1][i];
+          for (int i = 0; i < textList[1].length; i++) {
+            if (textList[1][i] != ",") {
+              reformatStr += textList[1][i];
             }
           }
           double money = double.parse(reformatStr);

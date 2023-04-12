@@ -15,16 +15,16 @@ class manualRework extends StatefulWidget {
 }
 
 class _manualReworkState extends State<manualRework> {
-
   final uid = FirebaseAuth.instance.currentUser!.uid;
 
-  void dataBaseConnect() async{
-    mongo.Db db = await mongo.Db.create('mongodb+srv://saveWaterDB:asdc12@cluster0.9ebxgrp.mongodb.net/test?retryWrites=true&w=majority');
+  void dataBaseConnect() async {
+    mongo.Db db = await mongo.Db.create(
+        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
     await db.open();
     final water = db.collection('waterData');
     //print(await water.find({'name': 'Ballz'}).toList());
     List find = await water.find({'name': 'Austin'}).toList();
-    if(find.length == 0){
+    if (find.length == 0) {
       print("working");
     }
     List us = await water.find({'uid': uid}).toList();
@@ -33,40 +33,47 @@ class _manualReworkState extends State<manualRework> {
     print(uid);
   }
 
-  void dataBaseAdd(double result) async{
-    mongo.Db db = await mongo.Db.create('mongodb+srv://saveWaterDB:asdc12@cluster0.9ebxgrp.mongodb.net/test?retryWrites=true&w=majority');
+  void dataBaseAdd(double result) async {
+    mongo.Db db = await mongo.Db.create(
+        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
     await db.open();
     final water = db.collection('waterData');
-    final find = await water.find({"uid" : uid}).toList();
+    final find = await water.find({"uid": uid}).toList();
     DateFormat dateFormat = DateFormat("dd-MM-yyyy");
     String date = dateFormat.format(DateTime.now());
-    if(find.length == 0){
-      await water.insertOne({'uid': uid, 'result': [[(result * 3.785).round(), date]]});
-    }else{
+    if (find.length == 0) {
+      await water.insertOne({
+        'uid': uid,
+        'result': [
+          [(result * 3.785).round(), date]
+        ]
+      });
+    } else {
       //List us = await water.find({'uid': uid}).toList();
       List waterUseList = find[0]['result'];
       List newAdd = [];
       bool dateEx = false;
 
-      for(int j = 0; j<waterUseList.length; j++){
-        if(waterUseList[j][1] == date){
+      for (int j = 0; j < waterUseList.length; j++) {
+        if (waterUseList[j][1] == date) {
           dateEx = true;
         }
       }
-      if(dateEx == false){
+      if (dateEx == false) {
         waterUseList.add([(result * 3.785).round(), date]);
-        await water.updateOne(mongo.where.eq('uid', uid), mongo.modify.set('result', waterUseList));
-      }else{
-        for(int i=0; i<waterUseList.length; i++){
-          if(waterUseList[i][1] == date){
+        await water.updateOne(mongo.where.eq('uid', uid),
+            mongo.modify.set('result', waterUseList));
+      } else {
+        for (int i = 0; i < waterUseList.length; i++) {
+          if (waterUseList[i][1] == date) {
             newAdd.add([(result * 3.785).round(), date]);
-          }else{
+          } else {
             newAdd.add(waterUseList[i]);
           }
         }
-        await water.updateOne(mongo.where.eq('uid', uid), mongo.modify.set('result', newAdd));
+        await water.updateOne(
+            mongo.where.eq('uid', uid), mongo.modify.set('result', newAdd));
       }
-
     }
     print("done");
   }
@@ -88,28 +95,40 @@ class _manualReworkState extends State<manualRework> {
         ],
         values: [4, 8, 13, 15],
         cals: 5.0,
-        imgs: ['assets/ind_assets/time_icons1.png', 'assets/ind_assets/time_icons2.png', 'assets/ind_assets/time_icons3.png', 'assets/ind_assets/time_icons4.png'],
-        topimg: 'assets/ind_assets/shower.png'
-    ),
+        imgs: [
+          'assets/ind_assets/time_icons1.png',
+          'assets/ind_assets/time_icons2.png',
+          'assets/ind_assets/time_icons3.png',
+          'assets/ind_assets/time_icons4.png'
+        ],
+        topimg: 'assets/ind_assets/shower.png'),
     Question(
         question: 'How often do you shower?',
         options: ['per day', 'per week', 'per month', 'per year'],
         values: [1.0, 0.14, 0.033, 0.003],
         cals: 1.0,
-        imgs: ['assets/ind_assets/days_tracker1.png', 'assets/ind_assets/days_tracker2.png', 'assets/ind_assets/days_tracker3.png', 'assets/ind_assets/days_tracker4.png'],
-        topimg: 'assets/ind_assets/shower.png'
-    ),
+        imgs: [
+          'assets/ind_assets/days_tracker1.png',
+          'assets/ind_assets/days_tracker2.png',
+          'assets/ind_assets/days_tracker3.png',
+          'assets/ind_assets/days_tracker4.png'
+        ],
+        topimg: 'assets/ind_assets/shower.png'),
     Question(
         question: 'How many times in a day, do you shower?',
         options: ['once', 'twice', 'thrice', '4 times'],
         values: [1, 2, 3, 4],
         cals: 35.0,
-        imgs: ['assets/ind_assets/repeat_symbols1.png', 'assets/ind_assets/repeat_symbols2.png', 'assets/ind_assets/repeat_symbols3.png', 'assets/ind_assets/repeat_symbols4.png'],
-        topimg: 'assets/ind_assets/shower_2.png'
-    ),
+        imgs: [
+          'assets/ind_assets/repeat_symbols1.png',
+          'assets/ind_assets/repeat_symbols2.png',
+          'assets/ind_assets/repeat_symbols3.png',
+          'assets/ind_assets/repeat_symbols4.png'
+        ],
+        topimg: 'assets/ind_assets/shower_2.png'),
     Question(
         question:
-        'How long do you leave your bathroom faucets running each day?',
+            'How long do you leave your bathroom faucets running each day?',
         options: [
           'Under 4 minutes',
           '4-10 minutes',
@@ -118,9 +137,13 @@ class _manualReworkState extends State<manualRework> {
         ],
         values: [4, 8, 20, 30],
         cals: 5.0,
-        imgs: ['assets/ind_assets/time_icons1.png', 'assets/ind_assets/time_icons2.png', 'assets/ind_assets/time_icons3.png', 'assets/ind_assets/time_icons4.png'],
-        topimg: 'assets/ind_assets/faucet .png'
-    ),
+        imgs: [
+          'assets/ind_assets/time_icons1.png',
+          'assets/ind_assets/time_icons2.png',
+          'assets/ind_assets/time_icons3.png',
+          'assets/ind_assets/time_icons4.png'
+        ],
+        topimg: 'assets/ind_assets/faucet .png'),
     Question(
         question: 'How long do you leave the kitchen faucet running each day?',
         options: [
@@ -131,25 +154,37 @@ class _manualReworkState extends State<manualRework> {
         ],
         values: [4, 13, 33, 45],
         cals: 5.0,
-        imgs: ['assets/ind_assets/time_icons1.png', 'assets/ind_assets/time_icons2.png', 'assets/ind_assets/time_icons3.png', 'assets/ind_assets/time_icons4.png'],
-        topimg: 'assets/ind_assets/faucet .png'
-    ),
+        imgs: [
+          'assets/ind_assets/time_icons1.png',
+          'assets/ind_assets/time_icons2.png',
+          'assets/ind_assets/time_icons3.png',
+          'assets/ind_assets/time_icons4.png'
+        ],
+        topimg: 'assets/ind_assets/faucet .png'),
     Question(
         question: 'How often do you wash your dishes?',
         options: ['per day', 'per week', 'per month', 'per year'],
         values: [1.0, 0.14, 0.033, 0.003],
         cals: 1.0,
-        imgs: ['assets/ind_assets/days_tracker1.png', 'assets/ind_assets/days_tracker2.png', 'assets/ind_assets/days_tracker3.png', 'assets/ind_assets/days_tracker4.png'],
-        topimg: 'assets/ind_assets/dish_wash.png'
-    ),
+        imgs: [
+          'assets/ind_assets/days_tracker1.png',
+          'assets/ind_assets/days_tracker2.png',
+          'assets/ind_assets/days_tracker3.png',
+          'assets/ind_assets/days_tracker4.png'
+        ],
+        topimg: 'assets/ind_assets/dish_wash.png'),
     Question(
         question: 'How many times do you wash you dishes?',
         options: ['once', 'twice', 'thrice', '4 times'],
         values: [1, 2, 3, 4],
         cals: 15.0,
-        imgs: ['assets/ind_assets/repeat_symbols1.png', 'assets/ind_assets/repeat_symbols2.png', 'assets/ind_assets/repeat_symbols3.png', 'assets/ind_assets/repeat_symbols4.png'],
-        topimg: 'assets/ind_assets/dish_wash.png'
-    )
+        imgs: [
+          'assets/ind_assets/repeat_symbols1.png',
+          'assets/ind_assets/repeat_symbols2.png',
+          'assets/ind_assets/repeat_symbols3.png',
+          'assets/ind_assets/repeat_symbols4.png'
+        ],
+        topimg: 'assets/ind_assets/dish_wash.png')
   ];
 
   int indexs = 0;
@@ -187,8 +222,7 @@ class _manualReworkState extends State<manualRework> {
                   image: AssetImage(questions[indexs].topimg),
                   height: 180,
                   width: 180,
-                  fit: BoxFit.fill
-              )
+                  fit: BoxFit.fill)
             ],
           ),
           Center(
@@ -201,21 +235,22 @@ class _manualReworkState extends State<manualRework> {
                   fontSize: 20,
                   fontFamily: 'Capriola',
                 ),
-                textAlign: TextAlign.center ,
+                textAlign: TextAlign.center,
               ),
             ),
           ),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(questions[indexs].options.length, (index){
+              children:
+                  List.generate(questions[indexs].options.length, (index) {
                 return InkWell(
-                  onTap: (){
+                  onTap: () {
                     colors[index] = Colors.lightBlueAccent;
                     setState(() {
-                      for(int i = 0; i<4; i++){
+                      for (int i = 0; i < 4; i++) {
                         opChosen = index;
-                        if(i!=index){
+                        if (i != index) {
                           colors[i] = Colors.white;
                         }
                       }
@@ -229,7 +264,9 @@ class _manualReworkState extends State<manualRework> {
                       child: Column(
                         children: [
                           Padding(
-                            child: Image(image: AssetImage(questions[indexs].imgs[index])),
+                            child: Image(
+                                image:
+                                    AssetImage(questions[indexs].imgs[index])),
                             padding: EdgeInsets.all(10),
                           ),
                           Padding(
@@ -300,10 +337,13 @@ class _manualReworkState extends State<manualRework> {
                             timeVal = questions[indexs].values[opChosen];
                           });
                         } else if (indexs == 2 || indexs == 6) {
-                          result += questions[indexs].values[opChosen] * questions[indexs].cals * timeVal;
+                          result += questions[indexs].values[opChosen] *
+                              questions[indexs].cals *
+                              timeVal;
                           prResults.add(result);
                         } else {
-                          result += questions[indexs].values[opChosen] * questions[indexs].cals;
+                          result += questions[indexs].values[opChosen] *
+                              questions[indexs].cals;
                           prResults.add(result);
                         }
                       }
@@ -318,7 +358,12 @@ class _manualReworkState extends State<manualRework> {
                         print(prResults);
                         dataBaseAdd(result);
                         print(result);
-                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ResultPage(result_: result)), (route) => route.isFirst);
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ResultPage(result_: result)),
+                            (route) => route.isFirst);
                       }
                       opChosen = 4;
                     } else {
@@ -357,16 +402,15 @@ class _manualReworkState extends State<manualRework> {
   }
 }
 
-
 class ResultPage extends StatelessWidget {
   final double result_;
 
   ResultPage({required this.result_});
 
-  String overunder(){
-    if(result_ > 114){
+  String overunder() {
+    if (result_ > 114) {
       return "You are over the average";
-    }else{
+    } else {
       return "Good Job. Your water usage is controlled";
     }
   }
@@ -384,70 +428,64 @@ class ResultPage extends StatelessWidget {
           children: <Widget>[
             Center(
                 child: Image.asset(
-                  'assets/ind_assets/whale.png',
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.contain,
-                )
-            ),
+              'assets/ind_assets/whale.png',
+              height: 100,
+              width: 100,
+              fit: BoxFit.contain,
+            )),
             Center(
                 child: Padding(
-                  padding: EdgeInsets.all(14),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Your approximate',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.lightBlueAccent,
-                            fontFamily: 'Capriola'
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'water footprint is',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.lightBlueAccent,
-                            fontFamily: 'Capriola'
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        '${(result_ * 3.785).round()} Liters per day',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.lightBlueAccent,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'or',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: 'Capriola',
-                            color: Colors.lightBlueAccent
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        '${result_.round()} Gallons per day',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.lightBlueAccent,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    ],
+              padding: EdgeInsets.all(14),
+              child: Column(
+                children: [
+                  Text(
+                    'Your approximate',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.lightBlueAccent,
+                        fontFamily: 'Capriola'),
                   ),
-                )
-            ),
+                  SizedBox(height: 8),
+                  Text(
+                    'water footprint is',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.lightBlueAccent,
+                        fontFamily: 'Capriola'),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    '${(result_ * 3.785).round()} Liters per day',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.lightBlueAccent,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'or',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Capriola',
+                        color: Colors.lightBlueAccent),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    '${result_.round()} Gallons per day',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.lightBlueAccent,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            )),
             Image(
               image: AssetImage('assets/ind_assets/drop_hold.png'),
               height: 100,
