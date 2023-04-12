@@ -94,7 +94,7 @@ class ResultPage extends StatelessWidget {
   ResultPage({required this.result_});
 
   String overunder() {
-    if (result_ > 350) {
+    if (result_ > 92) {
       return "You are over the average";
     } else {
       return "Good Job. Your water usage is controlled";
