@@ -16,8 +16,7 @@ class _historyState extends State<history> {
   List results = [];
 
   void getData() async {
-    mongo.Db db = await mongo.Db.create(
-        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
+    mongo.Db db = await mongo.Db.create('mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
     await db.open();
     final water = db.collection('waterData');
     final find = await water.find({"uid": uid}).toList();
@@ -94,10 +93,10 @@ class ResultPage extends StatelessWidget {
   ResultPage({required this.result_});
 
   String overunder() {
-    if (result_ > 92) {
-      return "You are over the average";
+    if (result_ > 114) {
+      return "❌ You are over the average";
     } else {
-      return "Good Job. Your water usage is controlled";
+      return "✔ Good Job. Your water usage is controlled";
     }
   }
 

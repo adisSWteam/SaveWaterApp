@@ -18,8 +18,7 @@ class _manualReworkState extends State<manualRework> {
   final uid = FirebaseAuth.instance.currentUser!.uid;
 
   void dataBaseConnect() async {
-    mongo.Db db = await mongo.Db.create(
-        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
+    mongo.Db db = await mongo.Db.create('mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
     await db.open();
     final water = db.collection('waterData');
     //print(await water.find({'name': 'Ballz'}).toList());
@@ -34,8 +33,7 @@ class _manualReworkState extends State<manualRework> {
   }
 
   void dataBaseAdd(double result) async {
-    mongo.Db db = await mongo.Db.create(
-        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
+    mongo.Db db = await mongo.Db.create('mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
     await db.open();
     final water = db.collection('waterData');
     final find = await water.find({"uid": uid}).toList();
@@ -409,9 +407,9 @@ class ResultPage extends StatelessWidget {
 
   String overunder() {
     if (result_ > 114) {
-      return "You are over the average";
+      return "❌ You are over the average";
     } else {
-      return "Good Job. Your water usage is controlled";
+      return "✔ Good Job. Your water usage is controlled";
     }
   }
 
@@ -486,6 +484,7 @@ class ResultPage extends StatelessWidget {
                 ],
               ),
             )),
+            Text("${overunder()}"),
             Image(
               image: AssetImage('assets/ind_assets/drop_hold.png'),
               height: 100,
