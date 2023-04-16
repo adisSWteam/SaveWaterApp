@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:save_water/theme/theme.dart';
 import 'package:save_water/widgets/image_card.dart';
 
 // ignore: camel_case_types
@@ -18,20 +19,17 @@ class _waterMenuState extends State<waterMenu> {
           title: Text(
             'Water Consumption Tracker',
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontSize: 18
-            ),
+                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),
           ),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.info, color: Colors.white),
-              onPressed: (){
+              onPressed: () {
                 Navigator.pushNamed(context, '/home/thanks');
               },
             ),
           ],
-          backgroundColor: Color(0xFF4B39EF),
+          backgroundColor: primaryColor,
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -40,39 +38,38 @@ class _waterMenuState extends State<waterMenu> {
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.pushNamed(context, '/home/water/manual');
                     },
                     child: ImageCard(
                       title: 'Manual Tracker',
-                      description: 'Track your water consumption by filling in the questionnaire and compare it with your local usage. Save more water and money!',
+                      description:
+                          'Track your water consumption by filling in the questionnaire and compare it with your local usage. Save more water and money!',
                       image: AssetImage('assets/images/tracker.png'),
-                    )
-                ),
+                    )),
                 InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.pushNamed(context, '/home/water/scan');
                     },
                     child: ImageCard(
                       title: 'Scan Tracker',
-                      description: 'Track your water usage by scanning your water bill and compare it with your local usage. Save more water and money!',
+                      description:
+                          'Track your water usage by scanning your water bill and compare it with your local usage. Save more water and money!',
                       image: AssetImage('assets/images/scan.png'),
-                    )
-                ),
+                    )),
                 InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.pushNamed(context, '/home/water/history');
                     },
                     child: ImageCard(
                       title: 'History',
-                      description: 'See and analyse how much water you have used.',
+                      description:
+                          'See and analyse how much water you have used.',
                       image: AssetImage('assets/images/history.png'),
-                    )
-                ),
+                    )),
               ],
             ),
           ),
-        )
-    );
+        ));
   }
 }

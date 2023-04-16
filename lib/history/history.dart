@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:save_water/theme/theme.dart';
 
 class history extends StatefulWidget {
   const history({Key? key}) : super(key: key);
@@ -76,7 +77,7 @@ class _historyState extends State<history> {
         title: Text(
           'History',
         ),
-        backgroundColor: Color(0xFF4B39EF),
+        backgroundColor: primaryColor,
         centerTitle: true,
       ),
       body: SingleChildScrollView(

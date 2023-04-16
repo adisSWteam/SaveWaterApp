@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
+import 'package:save_water/theme/theme.dart';
 
-const Color marineBlue = Color.fromARGB(255, 75, 57, 239);
+const Color marineBlue = primaryColor;
 
 class Authentication extends StatelessWidget {
   const Authentication({

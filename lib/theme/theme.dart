@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Color.fromARGB(255, 75, 57, 239);
+const Color primaryColor = Color.fromRGBO(39, 154, 255, 1);
 
 // TODO

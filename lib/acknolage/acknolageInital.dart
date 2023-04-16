@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:save_water/home/home_screen.dart';
+import 'package:save_water/theme/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class thanks extends StatelessWidget {
@@ -17,19 +18,20 @@ class thanks extends StatelessWidget {
         title: Text(
           'Acknowledgment',
           style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontSize: 18
-          ),
+              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF4B39EF),
+        backgroundColor: primaryColor,
         elevation: 0,
         actions: [
           IconButton(
             icon: const Icon(Icons.close),
-            onPressed: ()async{
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomeScreen(user: user)), (route) => false);
+            onPressed: () async {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HomeScreen(user: user)),
+                  (route) => false);
               final prefs = await SharedPreferences.getInstance();
               prefs.setBool('showHome', true);
             },
@@ -48,7 +50,9 @@ class thanks extends StatelessWidget {
           child: Center(
             child: Column(
               children: <Widget>[
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
+                ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
                   child: Text(
@@ -62,10 +66,16 @@ class thanks extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  child: Image.asset('assets/images/waterdrop.png', height: 95, width: 95,),
+                  child: Image.asset(
+                    'assets/images/waterdrop.png',
+                    height: 95,
+                    width: 95,
+                  ),
                   padding: EdgeInsets.all(10),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
+                ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                   child: Text(
@@ -78,13 +88,18 @@ class thanks extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
+                ),
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/ind_assets/principal.png'),
+                  backgroundImage:
+                      AssetImage('assets/ind_assets/principal.png'),
                   backgroundColor: Colors.transparent,
                   radius: 40,
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.02,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02,
+                ),
                 Text(
                   "Developed by",
                   textAlign: TextAlign.center,
@@ -94,16 +109,20 @@ class thanks extends StatelessWidget {
                     fontFamily: 'Capriola',
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.001,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.001,
+                ),
                 Text(
                   "Bhautik Dhanpal Shetty\nSairama Nikhilesh\nJohan Sebastian\nPedro Mark Fernandes\nKeegan D'Silva\nSpandan Bibek Chakrabarty\nSahal Mohamed\nof the Abu Dhabi Indian School - Al Muroor ",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 1,
                     fontFamily: 'Capriola',
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.005,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.005,
+                ),
                 Text(
                   "With support and guidance from",
                   textAlign: TextAlign.center,
@@ -126,12 +145,14 @@ class thanks extends StatelessWidget {
                       ),
                     ),
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/ind_assets/huffrishmaam.png'),
+                      backgroundImage:
+                          AssetImage('assets/ind_assets/huffrishmaam.png'),
                       backgroundColor: Colors.transparent,
                       radius: 40,
                     ),
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/ind_assets/aditimaam.png'),
+                      backgroundImage:
+                          AssetImage('assets/ind_assets/aditimaam.png'),
                       backgroundColor: Colors.transparent,
                       radius: 40,
                     ),
@@ -159,12 +180,14 @@ class thanks extends StatelessWidget {
                       ),
                     ),
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/ind_assets/nishamaam.png'),
+                      backgroundImage:
+                          AssetImage('assets/ind_assets/nishamaam.png'),
                       backgroundColor: Colors.transparent,
                       radius: 40,
                     ),
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/ind_assets/palaniappansir.png'),
+                      backgroundImage:
+                          AssetImage('assets/ind_assets/palaniappansir.png'),
                       backgroundColor: Colors.transparent,
                       radius: 40,
                     ),
