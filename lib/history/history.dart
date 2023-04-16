@@ -16,7 +16,8 @@ class _historyState extends State<history> {
   List results = [];
 
   void getData() async {
-    mongo.Db db = await mongo.Db.create('mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
+    mongo.Db db = await mongo.Db.create(
+        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
     await db.open();
     final water = db.collection('waterData');
     final find = await water.find({"uid": uid}).toList();
@@ -53,14 +54,14 @@ class _historyState extends State<history> {
               children: [
                 Text(
                   "${(res[0] / 3.785).round()}",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
                 SizedBox(
                   width: 5,
                 ),
                 Text(
                   "GPD recorded on ${res[1]}",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 13),
                 )
               ],
             ),

@@ -143,11 +143,12 @@ class _ScannableTrackerState extends State<ScannableTracker> {
   }
 
   void dataBaseAdd(double result) async {
-    mongo.Db db = await mongo.Db.create('mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
+    mongo.Db db = await mongo.Db.create(
+        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
     await db.open();
     final water = db.collection('waterData');
     final find = await water.find({"uid": uid}).toList();
-    DateFormat dateFormat = DateFormat("dd-MM-yyyy");
+    DateFormat dateFormat = DateFormat("dd-MM-yyyy, hh:mm a");
     String date = dateFormat.format(DateTime.now());
     if (find.length == 0) {
       await water.insertOne({
