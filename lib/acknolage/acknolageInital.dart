@@ -116,7 +116,7 @@ class thanks extends StatelessWidget {
                   "Bhautik Dhanpal Shetty\nSairama Nikhilesh\nJohan Sebastian\nPedro Mark Fernandes\nKeegan D'Silva\nSpandan Bibek Chakrabarty\nSahal Mohamed\nof the Abu Dhabi Indian School - Al Muroor ",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 1,
+                    fontSize: 11,
                     fontFamily: 'Capriola',
                   ),
                 ),
