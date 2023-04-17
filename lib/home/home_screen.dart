@@ -61,12 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
         // backgroundColor: Colors.white,
 
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.apps), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.camera_alt), label: "Scan"),
+          BottomNavigationBarItem(icon: Icon(Icons.event), label: "Events"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.travel_explore_rounded), label: "Events"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: "Settings"),
+              icon: Icon(Icons.account_circle), label: "Settings"),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.white,

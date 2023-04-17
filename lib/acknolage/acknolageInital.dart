@@ -113,7 +113,7 @@ class thanks extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.001,
                 ),
                 Text(
-                  "Bhautik Dhanpal Shetty\nSairama Nikhilesh\nJohan Sebastian\nPedro Mark Fernandes\nKeegan D'Silva\nSpandan Bibek Chakrabarty\nSahal Mohamed\nof the Abu Dhabi Indian School - Al Muroor ",
+                  "Bhautik Dhanpal Shetty, Sairama Nikhilesh,\nJohan Sebastian, Pedro Mark Fernandes,\nKeegan D'Silva, Spandan Bibek Chakrabarty,\nSahal Mohamed\n\nof the Abu Dhabi Indian School - Al Muroor ",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 11,
