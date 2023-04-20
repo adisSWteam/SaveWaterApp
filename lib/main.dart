@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-
+import 'package:flutter/services.dart';
 
 import 'package:save_water/authentication/auth_gate.dart';
 import 'package:save_water/home/start_page.dart';
@@ -20,6 +20,7 @@ import 'package:save_water/theme/theme.dart';
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp();
 
   FlutterNativeSplash.remove();
@@ -37,7 +38,7 @@ Future<void> main() async {
         '/home/event/international': (context) => const interEvents(),
         '/home/event/local': (context) => const localEvents(),
         '/home/gallery': (context) => const Gallery(),
-        '/home/thanks' : (context) => const thanks(),
+        '/home/thanks': (context) => const thanks(),
         '/home/water/history': (context) => const history(),
       },
       color: primaryColor,
