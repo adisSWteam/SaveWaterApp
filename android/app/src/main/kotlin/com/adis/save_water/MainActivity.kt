@@ -1,4 +1,4 @@
-package com.example.save_water
+package com.adis.save_water
 
 import io.flutter.embedding.android.FlutterActivity
 

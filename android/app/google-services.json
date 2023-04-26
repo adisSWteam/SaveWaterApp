@@ -1,42 +1,41 @@
 {
   "project_info": {
-    "project_number": "513276060408",
-    "project_id": "save-water-app-6082a",
-    "storage_bucket": "save-water-app-6082a.appspot.com"
+    "project_number": "870214579138",
+    "project_id": "adis-savewaterapp",
+    "storage_bucket": "adis-savewaterapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:513276060408:android:d1460157e26e73d047d10d",
+        "mobilesdk_app_id": "1:870214579138:android:5d23d0c84f4b0a238ddc5b",
         "android_client_info": {
           "package_name": "com.adis.save_water"
         }
       },
       "oauth_client": [
         {
-          "client_id": "513276060408-pca0qdrcmbtrhe37vcrdfiph8od2466k.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.adis.save_water",
-            "certificate_hash": "77af6bdc243d54eebe265f97ee32cea5c185a6a3"
-          }
-        },
-        {
-          "client_id": "513276060408-odpfvef200ip2qhiiliuak78vsb1thgj.apps.googleusercontent.com",
+          "client_id": "870214579138-at51g77t6hd6psnjnqea8vkn8rgfoo98.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBStr7fWZIE5LDSUIYFtBEmvRphTZQvnI0"
+          "current_key": "AIzaSyAzuZ4lKqoO5y8jABY3Sqpvxyat1Ct21bs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "513276060408-odpfvef200ip2qhiiliuak78vsb1thgj.apps.googleusercontent.com",
+              "client_id": "870214579138-at51g77t6hd6psnjnqea8vkn8rgfoo98.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "870214579138-csfuf0msrcglagb1pists3mmepu8l3cg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.saveWater"
+              }
             }
           ]
         }

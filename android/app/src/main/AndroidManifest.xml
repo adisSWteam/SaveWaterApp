@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.save_water">
+    package="com.adis.save_water">
     <application
         android:label="ADIS Save Water"
         android:name="${applicationName}"
