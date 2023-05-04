@@ -233,7 +233,7 @@ class _manualReworkState extends State<manualRework> {
                 questions[indexs].question,
                 style: TextStyle(
                   fontSize: 20,
-                  fontFamily: 'Capriola',
+                  fontFamily: 'Proxima-Nova',
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -275,7 +275,7 @@ class _manualReworkState extends State<manualRework> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 12,
-                                fontFamily: 'OpenSans',
+                                fontFamily: 'Proxima-Nova',
                               ),
                             ),
                             padding: EdgeInsets.all(10),
@@ -322,7 +322,7 @@ class _manualReworkState extends State<manualRework> {
                   padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
                   child: Text(
                     'Back',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -381,7 +381,7 @@ class _manualReworkState extends State<manualRework> {
                   padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
                   child: Text(
                     'Next',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -444,7 +444,7 @@ class ResultPage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.lightBlueAccent,
-                        fontFamily: 'Capriola'),
+                        fontFamily: 'Proxima-Nova'),
                   ),
                   SizedBox(height: 8),
                   Text(
@@ -453,7 +453,7 @@ class ResultPage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.lightBlueAccent,
-                        fontFamily: 'Capriola'),
+                        fontFamily: 'Proxima-Nova'),
                   ),
                   SizedBox(height: 8),
                   Text(
@@ -471,7 +471,7 @@ class ResultPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 20,
-                        fontFamily: 'Capriola',
+                        fontFamily: 'Proxima-Nova',
                         color: Colors.lightBlueAccent),
                   ),
                   SizedBox(height: 8),
@@ -487,6 +487,7 @@ class ResultPage extends StatelessWidget {
               ),
             )),
             Text("${overunder()}"),
+            SizedBox(height: 25),
             Image(
               image: AssetImage('assets/ind_assets/drop_hold.png'),
               height: 100,

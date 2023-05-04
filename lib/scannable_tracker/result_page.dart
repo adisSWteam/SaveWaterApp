@@ -39,7 +39,7 @@ class ScanTrackerResultPage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.lightBlueAccent,
-                        fontFamily: 'Capriola'),
+                        fontFamily: 'Proxima-Nova'),
                   ),
                   SizedBox(height: 8),
                   Text(
@@ -48,7 +48,7 @@ class ScanTrackerResultPage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.lightBlueAccent,
-                        fontFamily: 'Capriola'),
+                        fontFamily: 'Proxima-Nova'),
                   ),
                   SizedBox(height: 8),
                   Text(

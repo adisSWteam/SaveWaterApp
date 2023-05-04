@@ -61,7 +61,7 @@ class thanks extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'Capriola',
+                      fontFamily: 'Proxima-Nova',
                     ),
                   ),
                 ),
@@ -84,7 +84,7 @@ class thanks extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'Capriola',
+                      fontFamily: 'Proxima-Nova',
                     ),
                   ),
                 ),
@@ -106,7 +106,7 @@ class thanks extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'Capriola',
+                    fontFamily: 'Proxima-Nova',
                   ),
                 ),
                 SizedBox(
@@ -117,19 +117,20 @@ class thanks extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 11,
-                    fontFamily: 'Capriola',
+                    fontFamily: 'Proxima-Nova',
                   ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.005,
                 ),
+                SizedBox(height: 10),
                 Text(
                   "With support and guidance from",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'Capriola',
+                    fontFamily: 'Proxima-Nova',
                   ),
                 ),
                 Row(
@@ -141,7 +142,7 @@ class thanks extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Capriola',
+                        fontFamily: 'Proxima-Nova',
                       ),
                     ),
                     CircleAvatar(
@@ -162,7 +163,7 @@ class thanks extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Capriola',
+                        fontFamily: 'Proxima-Nova',
                       ),
                     ),
                   ],
@@ -176,7 +177,7 @@ class thanks extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Capriola',
+                        fontFamily: 'Proxima-Nova',
                       ),
                     ),
                     CircleAvatar(
@@ -199,7 +200,7 @@ class thanks extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
-                          fontFamily: 'Capriola',
+                          fontFamily: 'Proxima-Nova',
                         ),
                       ),
                     ),

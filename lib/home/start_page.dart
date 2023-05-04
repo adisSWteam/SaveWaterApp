@@ -40,7 +40,7 @@ class _StartState extends State<Start> {
             Align(
               alignment: AlignmentDirectional(0, 0),
               child: Text(
-                'WELCOME!',
+                'Welcome!',
                 style: TextStyle(
                     fontSize: 60,
                     letterSpacing: 2.0,
@@ -58,7 +58,7 @@ class _StartState extends State<Start> {
             Align(
               alignment: AlignmentDirectional(0.02, 0.61),
               child: Text(
-                'An intiative by',
+                'An Intiative By',
                 style: TextStyle(
                   color: Color(0xFF40DBFF),
                 ),
@@ -67,7 +67,7 @@ class _StartState extends State<Start> {
             Align(
               alignment: AlignmentDirectional(0, 0.7),
               child: Text(
-                'ABU DHABI INDIAN SCHOOL, AL MUROOR',
+                'Abu Dhabi Indian School, Al Muroor',
                 style: TextStyle(color: Colors.white),
               ),
             )

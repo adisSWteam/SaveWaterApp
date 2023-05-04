@@ -131,7 +131,7 @@ class ResultPage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.lightBlueAccent,
-                        fontFamily: 'Capriola'),
+                        fontFamily: 'Proxima-Nova'),
                   ),
                   SizedBox(height: 8),
                   Text(
@@ -140,7 +140,7 @@ class ResultPage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.lightBlueAccent,
-                        fontFamily: 'Capriola'),
+                        fontFamily: 'Proxima-Nova'),
                   ),
                   SizedBox(height: 8),
                   Text(
@@ -158,7 +158,7 @@ class ResultPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 20,
-                        fontFamily: 'Capriola',
+                        fontFamily: 'Proxima-Nova',
                         color: Colors.lightBlueAccent),
                   ),
                   SizedBox(height: 8),
@@ -174,6 +174,7 @@ class ResultPage extends StatelessWidget {
               ),
             )),
             Text("${overunder()}"),
+            SizedBox(height: 25),
             Image(
               image: AssetImage('assets/ind_assets/drop_hold.png'),
               height: 100,

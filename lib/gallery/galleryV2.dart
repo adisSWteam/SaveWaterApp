@@ -5,9 +5,7 @@ import 'package:http/http.dart';
 import 'dart:convert';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-
 import 'package:save_water/theme/theme.dart';
-
 
 class Gallery extends StatefulWidget {
   const Gallery({Key? key}) : super(key: key);
@@ -21,12 +19,15 @@ class _GalleryState extends State<Gallery> {
 
   void getData() async {
     Response response =
-    await get(Uri.parse('https://api.npoint.io/fa4b067e2d359e33b379'));
+        await get(Uri.parse('https://api.npoint.io/fa4b067e2d359e33b379'));
     List linkI = jsonDecode(response.body);
     setState(() {
       links = linkI;
     });
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> mainShow(links: links)), (route) => route.isFirst);
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => mainShow(links: links)),
+        (route) => route.isFirst);
   }
 
   @override
@@ -38,16 +39,14 @@ class _GalleryState extends State<Gallery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SpinKitRotatingCircle(
-          color: Colors.lightBlueAccent,
-          size: 50.0,
-        ),
-      )
-    );
+        body: Center(
+      child: SpinKitRotatingCircle(
+        color: Colors.lightBlueAccent,
+        size: 50.0,
+      ),
+    ));
   }
 }
-
 
 class ShowImg extends StatelessWidget {
   final String title_;
@@ -90,9 +89,9 @@ class _mainShowState extends State<mainShow> {
             context,
             MaterialPageRoute(
                 builder: (context) => ShowImg(
-                  title_: _link['title'],
-                  link2_: _link['link'],
-                )));
+                      title_: _link['title'],
+                      link2_: _link['link'],
+                    )));
       },
       child: Card(
         child: Padding(
@@ -117,4 +116,3 @@ class _mainShowState extends State<mainShow> {
     );
   }
 }
-

@@ -84,12 +84,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-  - family: Capriola
+  - family: Proxima-Nova
     fonts:
-      - asset: fonts/Capriola-Regular.ttf
-  - family: OpenSans
-    fonts:
-      - asset: fonts/OpenSans-Regular.ttf
+      - asset: fonts/ProximaNova.otf
 
   #
   # For details regarding fonts from package dependencies,
