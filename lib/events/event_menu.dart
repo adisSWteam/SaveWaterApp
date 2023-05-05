@@ -16,7 +16,7 @@ class _eventMenuState extends State<eventMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Upcoming Events',
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),
@@ -33,7 +33,7 @@ class _eventMenuState extends State<eventMenu> {
                     onTap: () {
                       Navigator.pushNamed(context, '/home/event/international');
                     },
-                    child: ImageCard(
+                    child: const ImageCard(
                       title: 'International Events',
                       description: 'Events happening all over the world',
                       image: AssetImage('assets/images/intl_event.png'),
@@ -42,7 +42,7 @@ class _eventMenuState extends State<eventMenu> {
                     onTap: () {
                       Navigator.pushNamed(context, '/home/event/local');
                     },
-                    child: ImageCard(
+                    child: const ImageCard(
                       title: 'Local Events',
                       description:
                           'Find out about all the events happening in UAE',

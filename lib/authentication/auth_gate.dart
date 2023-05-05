@@ -11,13 +11,12 @@ class AuthGate extends StatefulWidget {
 
   @override
   State<AuthGate> createState() => _AuthGateState();
-
 }
 
 class _AuthGateState extends State<AuthGate> {
   bool homeState = false;
 
-  void getState() async{
+  void getState() async {
     final prefs = await SharedPreferences.getInstance();
     final state = prefs.getBool('showHome') ?? false;
     homeState = state;
@@ -28,6 +27,7 @@ class _AuthGateState extends State<AuthGate> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => getState());
   }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -39,11 +39,11 @@ class _AuthGateState extends State<AuthGate> {
 
         // Render application if signed in
         // return HomePage(user: snapshot.data!);
-        if(homeState == false) {
-          print(homeState);
-          return thanks(user: snapshot.data!,);
-        }else{
-          print(homeState);
+        if (homeState == false) {
+          return thanks(
+            user: snapshot.data!,
+          );
+        } else {
           return HomeScreen(user: snapshot.data!);
         }
       },

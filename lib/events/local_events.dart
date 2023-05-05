@@ -38,14 +38,14 @@ class _localEventsState extends State<localEvents> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.fromLTRB(10, 10, 0, 3),
+            padding: const EdgeInsets.fromLTRB(10, 10, 0, 3),
             child: Text(
               "${events['event name']}:",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(10, 10, 0, 3),
+            padding: const EdgeInsets.fromLTRB(10, 10, 0, 3),
             child: Text('${events['dis']}'),
           ),
         ],
@@ -57,7 +57,7 @@ class _localEventsState extends State<localEvents> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Local Events',
           ),
           backgroundColor: primaryColor,

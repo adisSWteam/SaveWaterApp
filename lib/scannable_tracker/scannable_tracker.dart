@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart' as google_ml_kit;
 import 'package:image_picker/image_picker.dart';
@@ -32,7 +34,7 @@ class _ScannableTrackerState extends State<ScannableTracker> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Scannable Tracker',
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
@@ -41,8 +43,7 @@ class _ScannableTrackerState extends State<ScannableTracker> {
         centerTitle: true,
       ),
       body: Center(
-          child: Container(
-              child: Column(
+          child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -57,7 +58,7 @@ class _ScannableTrackerState extends State<ScannableTracker> {
                   getImage(ImageSource.gallery);
                 },
                 child: Ink.image(
-                    image: AssetImage(
+                    image: const AssetImage(
                       "assets/ind_assets/upload_from_gallery.png",
                     ),
                     height: 260,
@@ -70,7 +71,7 @@ class _ScannableTrackerState extends State<ScannableTracker> {
                   getImage(ImageSource.camera);
                 },
                 child: Ink.image(
-                    image: AssetImage(
+                    image: const AssetImage(
                       "assets/ind_assets/take_photo.png",
                     ),
                     height: 260,
@@ -83,14 +84,13 @@ class _ScannableTrackerState extends State<ScannableTracker> {
             height: 160,
           ),
         ],
-      ))),
+      )),
     );
   }
 
   void processImage() {
-    scannedText.runes.forEach((word) {
-      print(word);
-    });
+    // ignore: unused_local_variable
+    for (var word in scannedText.runes) {}
   }
 
   void getImage(ImageSource source) async {
@@ -107,7 +107,6 @@ class _ScannableTrackerState extends State<ScannableTracker> {
       imageFile = null;
       scannedText = "Error occured while scanning";
     }
-    print("Here 1st");
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -118,8 +117,8 @@ class _ScannableTrackerState extends State<ScannableTracker> {
   }
 
   void getLitres(double price) async {
-    final double greenBandPricePerM3 = 7.84;
-    final double redBandPricePerM3 = 10.41;
+    const double greenBandPricePerM3 = 7.84;
+    const double redBandPricePerM3 = 10.41;
     final double greenBandPriceLimit;
 
     double units = 0;
@@ -138,8 +137,6 @@ class _ScannableTrackerState extends State<ScannableTracker> {
     units *= 1000;
     dataBaseAdd(units);
     scannedText = units.round().toString();
-    print(units);
-    print(scannedText);
   }
 
   void dataBaseAdd(double result) async {
@@ -150,7 +147,7 @@ class _ScannableTrackerState extends State<ScannableTracker> {
     final find = await water.find({"uid": uid}).toList();
     DateFormat dateFormat = DateFormat("dd-MM-yyyy, hh:mm a");
     String date = dateFormat.format(DateTime.now());
-    if (find.length == 0) {
+    if (find.isEmpty) {
       await water.insertOne({
         'uid': uid,
         'result': [
@@ -184,7 +181,6 @@ class _ScannableTrackerState extends State<ScannableTracker> {
             mongo.where.eq('uid', uid), mongo.modify.set('result', newAdd));
       }
     }
-    print("done");
   }
 
   void getRecognisedText(XFile image) async {
@@ -202,14 +198,12 @@ class _ScannableTrackerState extends State<ScannableTracker> {
         List<String> textList = text.split(" ");
 
         if (textList[0] == "AED") {
-          print("Found");
           for (int i = 0; i < textList[1].length; i++) {
             if (textList[1][i] != ",") {
               reformatStr += textList[1][i];
             }
           }
           double money = double.parse(reformatStr);
-          print(money);
           getLitres(money);
         }
       }

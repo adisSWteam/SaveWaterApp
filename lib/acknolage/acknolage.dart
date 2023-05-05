@@ -10,7 +10,7 @@ class thanks extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Acknowledgment',
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),
@@ -20,8 +20,8 @@ class thanks extends StatelessWidget {
         elevation: 0,
       ),
       body: Container(
-        constraints: BoxConstraints.expand(),
-        decoration: BoxDecoration(
+        constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/ind_assets/waterbg.png'),
                 fit: BoxFit.cover)),
@@ -34,7 +34,7 @@ class thanks extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
                   child: Text(
                     "'Save Water App' developed as part of the 'Hold That Drop' initiative\n by Abu Dhabi Indian School Al-Muroor",
@@ -47,17 +47,17 @@ class thanks extends StatelessWidget {
                   ),
                 ),
                 Padding(
+                  padding: const EdgeInsets.all(10),
                   child: Image.asset(
                     'assets/images/waterdrop.png',
                     height: 95,
                     width: 95,
                   ),
-                  padding: EdgeInsets.all(10),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                   child: Text(
                     "Under the vision and guidance of the Principal Mr. Neeraj Bhargava",
@@ -72,7 +72,7 @@ class thanks extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundImage:
                       AssetImage('assets/ind_assets/principal.png'),
                   backgroundColor: Colors.transparent,
@@ -81,7 +81,7 @@ class thanks extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.02,
                 ),
-                Text(
+                const Text(
                   "Developed by",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -93,7 +93,7 @@ class thanks extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.001,
                 ),
-                Text(
+                const Text(
                   "Bhautik Dhanpal Shetty, Sairama Nikhilesh,\nJohan Sebastian, Pedro Mark Fernandes,\nKeegan D'Silva, Spandan Bibek Chakrabarty,\nSahal Mohamed\n\nof the Abu Dhabi Indian School - Al Muroor ",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -104,8 +104,8 @@ class thanks extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.005,
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   "With support and guidance from",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -116,7 +116,7 @@ class thanks extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Text(
                       "Mrs. Hufrish Parekh",
                       textAlign: TextAlign.center,
@@ -151,7 +151,7 @@ class thanks extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Text(
                       "Mrs. Nisha Sameer",
                       textAlign: TextAlign.center,
@@ -173,7 +173,7 @@ class thanks extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       radius: 40,
                     ),
-                    Container(
+                    SizedBox(
                       width: 65,
                       child: Text(
                         "Mr. Palaniappan Muthu",

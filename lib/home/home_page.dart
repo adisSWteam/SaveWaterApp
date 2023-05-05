@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:save_water/home/profile_page.dart';
 import 'package:save_water/widgets/image_card.dart';
 
-
 class HomePage extends StatelessWidget {
   const HomePage({Key? key, required this.user}) : super(key: key);
   final User user;
@@ -14,21 +13,21 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text(
+          title: const Text(
             'Main Menu',
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontSize: 18
-            ),
+                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),
           ),
-          backgroundColor: Color(0xFF4B39EF),
+          backgroundColor: const Color(0xFF4B39EF),
           centerTitle: true,
           actions: [
             IconButton(
               icon: const Icon(Icons.person),
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfilePage(user: user)));
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfilePage(user: user)));
               },
             )
           ],
@@ -44,7 +43,7 @@ class HomePage extends StatelessWidget {
                 child: const ImageCard(
                   title: "Water Consumption Tracker",
                   description:
-                  "Track your water consumption by using our manual tracker or by scanning your bill!",
+                      "Track your water consumption by using our manual tracker or by scanning your bill!",
                   image: AssetImage("assets/images/watertracker1.png"),
                 ),
               ),
@@ -55,7 +54,7 @@ class HomePage extends StatelessWidget {
                 child: const ImageCard(
                   title: "Events",
                   description:
-                  "Find all the upcoming events regarding the save water campaign locally or internationally.",
+                      "Find all the upcoming events regarding the save water campaign locally or internationally.",
                   image: AssetImage("assets/images/events.png"),
                 ),
               ),

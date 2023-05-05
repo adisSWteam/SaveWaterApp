@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, file_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -38,7 +38,7 @@ class _GalleryState extends State<Gallery> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: Center(
       child: SpinKitRotatingCircle(
         color: Colors.lightBlueAccent,
@@ -52,7 +52,8 @@ class ShowImg extends StatelessWidget {
   final String title_;
   final String link2_;
 
-  ShowImg({required this.title_, required this.link2_});
+  const ShowImg({Key? key, required this.title_, required this.link2_})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +65,8 @@ class ShowImg extends StatelessWidget {
       ),
       body: Center(
         child: FittedBox(
-          child: Image.network(link2_),
           fit: BoxFit.fill,
+          child: Image.network(link2_),
         ),
       ),
     );
@@ -75,28 +76,28 @@ class ShowImg extends StatelessWidget {
 // ignore: must_be_immutable
 class mainShow extends StatefulWidget {
   List links;
-  mainShow({required this.links});
+  mainShow({Key? key, required this.links}) : super(key: key);
 
   @override
   State<mainShow> createState() => _mainShowState();
 }
 
 class _mainShowState extends State<mainShow> {
-  Widget imageCard(_link) {
+  Widget imageCard(link) {
     return InkWell(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => ShowImg(
-                      title_: _link['title'],
-                      link2_: _link['link'],
+                      title_: link['title'],
+                      link2_: link['link'],
                     )));
       },
       child: Card(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: Image.network(_link['link']),
+          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Image.network(link['link']),
         ),
       ),
     );
@@ -106,7 +107,7 @@ class _mainShowState extends State<mainShow> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Images'),
+        title: const Text('Images'),
         centerTitle: true,
       ),
       body: GridView.count(

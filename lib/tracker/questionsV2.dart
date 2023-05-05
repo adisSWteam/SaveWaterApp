@@ -1,4 +1,6 @@
-class Question{
+// ignore_for_file: file_names
+
+class Question {
   String question = '';
   List options = [];
   List values = [];
@@ -6,12 +8,11 @@ class Question{
   List imgs = [];
   String topimg = '';
 
-  Question({question, options, values, cals, imgs, topimg}){
-    this.question = question;
-    this.options = options;
-    this.values = values;
-    this.cals = cals;
-    this.imgs = imgs;
-    this.topimg = topimg;
-  }
+  Question(
+      {required this.question,
+      required this.options,
+      required this.values,
+      required this.cals,
+      required this.imgs,
+      required this.topimg});
 }

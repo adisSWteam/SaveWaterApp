@@ -30,9 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List getpages() {
     return [
-      waterMenu(),
-      ScannableTracker(),
-      eventMenu(),
+      const waterMenu(),
+      const ScannableTracker(),
+      const eventMenu(),
       ProfilePage(user: widget.user),
     ];
   }

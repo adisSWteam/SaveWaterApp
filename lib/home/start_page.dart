@@ -9,7 +9,7 @@ class Start extends StatefulWidget {
 
 class _StartState extends State<Start> {
   void load() async {
-    await Future.delayed(Duration(seconds: 1), () {
+    await Future.delayed(const Duration(seconds: 1), () {
       Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
     });
   }
@@ -24,20 +24,20 @@ class _StartState extends State<Start> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        constraints: BoxConstraints.expand(),
-        decoration: BoxDecoration(
+        constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/waterbg.png'),
                 fit: BoxFit.cover)),
         child: Stack(
           children: <Widget>[
             Align(
-                alignment: AlignmentDirectional(0.85, -0.8),
+                alignment: const AlignmentDirectional(0.85, -0.8),
                 child: Image.asset(
                   'assets/images/waterdrop.png',
                   height: 100,
                 )),
-            Align(
+            const Align(
               alignment: AlignmentDirectional(0, 0),
               child: Text(
                 'Welcome!',
@@ -48,14 +48,14 @@ class _StartState extends State<Start> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            Align(
+            const Align(
               alignment: AlignmentDirectional(0.07, 0.52),
               child: Text(
                 'HOLD THAT DROP',
                 style: TextStyle(fontSize: 25, color: Colors.white),
               ),
             ),
-            Align(
+            const Align(
               alignment: AlignmentDirectional(0.02, 0.61),
               child: Text(
                 'An Intiative By',
@@ -64,7 +64,7 @@ class _StartState extends State<Start> {
                 ),
               ),
             ),
-            Align(
+            const Align(
               alignment: AlignmentDirectional(0, 0.7),
               child: Text(
                 'Abu Dhabi Indian School, Al Muroor',

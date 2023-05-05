@@ -22,13 +22,11 @@ class _historyState extends State<history> {
     await db.open();
     final water = db.collection('waterData');
     final find = await water.find({"uid": uid}).toList();
-    print(find);
-    if (find.length != 0) {
+    if (find.isNotEmpty) {
       setState(() {
         results = find[0]['result'];
       });
     }
-    print("Done");
   }
 
   @override
@@ -49,20 +47,21 @@ class _historyState extends State<history> {
           elevation: 5,
           margin: const EdgeInsets.fromLTRB(16, 14, 16, 14),
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "${(res[0] / 3.785).round()}",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 15),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 Text(
                   "GPD recorded on ${res[1]}",
-                  style: TextStyle(fontSize: 13),
+                  style: const TextStyle(fontSize: 13),
                 )
               ],
             ),
@@ -74,7 +73,7 @@ class _historyState extends State<history> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'History',
         ),
         backgroundColor: primaryColor,
@@ -92,7 +91,7 @@ class _historyState extends State<history> {
 class ResultPage extends StatelessWidget {
   final int result_;
 
-  ResultPage({required this.result_});
+  const ResultPage({Key? key, required this.result_}) : super(key: key);
 
   String overunder() {
     if (result_ > 114) {
@@ -107,7 +106,7 @@ class ResultPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Tracker'),
+          title: const Text('Tracker'),
           centerTitle: true,
         ),
         body: Column(
@@ -122,10 +121,10 @@ class ResultPage extends StatelessWidget {
             )),
             Center(
                 child: Padding(
-              padding: EdgeInsets.all(14),
+              padding: const EdgeInsets.all(14),
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     'Your approximate',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -133,8 +132,8 @@ class ResultPage extends StatelessWidget {
                         color: Colors.lightBlueAccent,
                         fontFamily: 'Proxima-Nova'),
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     'water footprint is',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -142,18 +141,18 @@ class ResultPage extends StatelessWidget {
                         color: Colors.lightBlueAccent,
                         fontFamily: 'Proxima-Nova'),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     '${result_.round()} Liters per day',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 30,
                       color: Colors.lightBlueAccent,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     'or',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -161,11 +160,11 @@ class ResultPage extends StatelessWidget {
                         fontFamily: 'Proxima-Nova',
                         color: Colors.lightBlueAccent),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     '${(result_ / 3.785).round()} Gallons per day',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 30,
                         color: Colors.lightBlueAccent,
                         fontWeight: FontWeight.bold),
@@ -173,9 +172,9 @@ class ResultPage extends StatelessWidget {
                 ],
               ),
             )),
-            Text("${overunder()}"),
-            SizedBox(height: 25),
-            Image(
+            Text(overunder()),
+            const SizedBox(height: 25),
+            const Image(
               image: AssetImage('assets/ind_assets/drop_hold.png'),
               height: 100,
               width: 100,

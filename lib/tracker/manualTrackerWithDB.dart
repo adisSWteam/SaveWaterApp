@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, unnecessary_statements
+// ignore_for_file: camel_case_types, unnecessary_statements, file_names
 
 import 'package:flutter/material.dart';
 import 'package:save_water/tracker/questionsV2.dart';
@@ -24,13 +24,7 @@ class _manualReworkState extends State<manualRework> {
     final water = db.collection('waterData');
     //print(await water.find({'name': 'Ballz'}).toList());
     List find = await water.find({'name': 'Austin'}).toList();
-    if (find.length == 0) {
-      print("working");
-    }
-    List us = await water.find({'uid': uid}).toList();
-    print(us[0]['result']);
-    print("Done");
-    print(uid);
+    if (find.isEmpty) {}
   }
 
   void dataBaseAdd(double result) async {
@@ -41,7 +35,7 @@ class _manualReworkState extends State<manualRework> {
     final find = await water.find({"uid": uid}).toList();
     DateFormat dateFormat = DateFormat("dd-MM-yyyy, hh:mm a");
     String date = dateFormat.format(DateTime.now());
-    if (find.length == 0) {
+    if (find.isEmpty) {
       await water.insertOne({
         'uid': uid,
         'result': [
@@ -75,7 +69,6 @@ class _manualReworkState extends State<manualRework> {
             mongo.where.eq('uid', uid), mongo.modify.set('result', newAdd));
       }
     }
-    print("done");
   }
 
   @override
@@ -209,7 +202,7 @@ class _manualReworkState extends State<manualRework> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Water Tracker'),
+        title: const Text('Water Tracker'),
         centerTitle: true,
       ),
       body: Column(
@@ -226,12 +219,12 @@ class _manualReworkState extends State<manualRework> {
             ],
           ),
           Center(
-            child: Container(
+            child: SizedBox(
               width: 250,
               height: 100,
               child: Text(
                 questions[indexs].question,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontFamily: 'Proxima-Nova',
                 ),
@@ -256,7 +249,7 @@ class _manualReworkState extends State<manualRework> {
                       }
                     });
                   },
-                  child: Container(
+                  child: SizedBox(
                     width: 80,
                     height: 150,
                     child: Card(
@@ -264,21 +257,21 @@ class _manualReworkState extends State<manualRework> {
                       child: Column(
                         children: [
                           Padding(
+                            padding: const EdgeInsets.all(10),
                             child: Image(
                                 image:
                                     AssetImage(questions[indexs].imgs[index])),
-                            padding: EdgeInsets.all(10),
                           ),
                           Padding(
+                            padding: const EdgeInsets.all(10),
                             child: Text(
                               questions[indexs].options[index],
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
                                 fontFamily: 'Proxima-Nova',
                               ),
                             ),
-                            padding: EdgeInsets.all(10),
                           )
                         ],
                       ),
@@ -314,11 +307,9 @@ class _manualReworkState extends State<manualRework> {
                       colors[i] = Colors.white;
                     }
                   }
-                  print(result);
-                  print(prResults);
                 },
                 style: TextButton.styleFrom(backgroundColor: backCol(indexs)),
-                child: Padding(
+                child: const Padding(
                   padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
                   child: Text(
                     'Back',
@@ -326,7 +317,7 @@ class _manualReworkState extends State<manualRework> {
                   ),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               TextButton(
                 onPressed: () {
                   setState(() {
@@ -351,13 +342,9 @@ class _manualReworkState extends State<manualRework> {
                       colors[opChosen] = Colors.white;
 
                       if (indexs != questions.length - 1) {
-                        print(result);
-                        print(prResults);
                         indexs++;
                       } else {
-                        print(prResults);
                         dataBaseAdd(result);
-                        print(result);
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
@@ -377,7 +364,7 @@ class _manualReworkState extends State<manualRework> {
                   });
                 },
                 style: TextButton.styleFrom(backgroundColor: Colors.blue),
-                child: Padding(
+                child: const Padding(
                   padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
                   child: Text(
                     'Next',
@@ -387,7 +374,7 @@ class _manualReworkState extends State<manualRework> {
               ),
             ],
           ),
-          Expanded(
+          const Expanded(
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Image(
@@ -405,7 +392,7 @@ class _manualReworkState extends State<manualRework> {
 class ResultPage extends StatelessWidget {
   final double result_;
 
-  ResultPage({required this.result_});
+  const ResultPage({Key? key, required this.result_}) : super(key: key);
 
   String overunder() {
     if (result_ > 114) {
@@ -420,7 +407,7 @@ class ResultPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Tracker'),
+          title: const Text('Tracker'),
           centerTitle: true,
         ),
         body: Column(
@@ -435,10 +422,10 @@ class ResultPage extends StatelessWidget {
             )),
             Center(
                 child: Padding(
-              padding: EdgeInsets.all(14),
+              padding: const EdgeInsets.all(14),
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     'Your approximate',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -446,8 +433,8 @@ class ResultPage extends StatelessWidget {
                         color: Colors.lightBlueAccent,
                         fontFamily: 'Proxima-Nova'),
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     'water footprint is',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -455,18 +442,18 @@ class ResultPage extends StatelessWidget {
                         color: Colors.lightBlueAccent,
                         fontFamily: 'Proxima-Nova'),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     '${(result_ * 3.785).round()} Liters per day',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 30,
                       color: Colors.lightBlueAccent,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     'or',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -474,11 +461,11 @@ class ResultPage extends StatelessWidget {
                         fontFamily: 'Proxima-Nova',
                         color: Colors.lightBlueAccent),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     '${result_.round()} Gallons per day',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 30,
                         color: Colors.lightBlueAccent,
                         fontWeight: FontWeight.bold),
@@ -486,9 +473,9 @@ class ResultPage extends StatelessWidget {
                 ],
               ),
             )),
-            Text("${overunder()}"),
-            SizedBox(height: 25),
-            Image(
+            Text(overunder()),
+            const SizedBox(height: 25),
+            const Image(
               image: AssetImage('assets/ind_assets/drop_hold.png'),
               height: 100,
               width: 100,
