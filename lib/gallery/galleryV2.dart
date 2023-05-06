@@ -1,9 +1,11 @@
-// ignore_for_file: camel_case_types, file_names, use_build_context_synchronously
+// ignore_for_file: camel_case_types, file_names, use_build_context_synchronously, prefer_const_constructors, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 
 import 'package:save_water/theme/theme.dart';
 
@@ -18,16 +20,12 @@ class _GalleryState extends State<Gallery> {
   List links = [];
 
   void getData() async {
-    Response response =
-        await get(Uri.parse('https://api.npoint.io/fa4b067e2d359e33b379'));
+    Response response = await get(Uri.parse(
+        'https://api.jsonbin.io/v3/b/645619dd8e4aa6225e976721?meta=false'));
     List linkI = jsonDecode(response.body);
     setState(() {
       links = linkI;
     });
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => mainShow(links: links)),
-        (route) => route.isFirst);
   }
 
   @override
@@ -38,68 +36,86 @@ class _GalleryState extends State<Gallery> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Center(
-      child: SpinKitRotatingCircle(
-        color: Colors.lightBlueAccent,
-        size: 50.0,
-      ),
-    ));
-  }
-}
-
-class ShowImg extends StatelessWidget {
-  final String title_;
-  final String link2_;
-
-  const ShowImg({Key? key, required this.title_, required this.link2_})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title_),
+        title: const Text('Images'),
         centerTitle: true,
         backgroundColor: primaryColor,
       ),
-      body: Center(
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: Image.network(link2_),
-        ),
-      ),
+      body: links.isEmpty
+          ? const Center(
+              child: SpinKitWave(
+                color: Colors.lightBlueAccent,
+                size: 25.0,
+              ),
+            )
+          : GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              itemCount: links.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MainShow(
+                          links: links,
+                          initialIndex: index,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.network(
+                      links[index]['link'],
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
+            ),
     );
   }
 }
 
-// ignore: must_be_immutable
-class mainShow extends StatefulWidget {
-  List links;
-  mainShow({Key? key, required this.links}) : super(key: key);
+class MainShow extends StatefulWidget {
+  final List links;
+  final int initialIndex;
+  const MainShow({Key? key, required this.links, required this.initialIndex})
+      : super(key: key);
 
   @override
-  State<mainShow> createState() => _mainShowState();
+  _MainShowState createState() => _MainShowState();
 }
 
-class _mainShowState extends State<mainShow> {
-  Widget imageCard(link) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ShowImg(
-                      title_: link['title'],
-                      link2_: link['link'],
-                    )));
+class _MainShowState extends State<MainShow> {
+  int currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = widget.initialIndex;
+  }
+
+  void showImg(String title, String link) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          //title: Text(title),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(title),
+              SizedBox(height: 5.0),
+              //Image.network(link),
+            ],
+          ),
+        );
       },
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: Image.network(link['link']),
-        ),
-      ),
     );
   }
 
@@ -110,9 +126,30 @@ class _mainShowState extends State<mainShow> {
         title: const Text('Images'),
         centerTitle: true,
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        children: widget.links.map((e) => imageCard(e)).toList(),
+      body: GestureDetector(
+        child: PhotoViewGallery.builder(
+          itemCount: widget.links.length,
+          builder: (BuildContext context, int index) {
+            return PhotoViewGalleryPageOptions(
+              imageProvider: NetworkImage(widget.links[index]['link']),
+              initialScale: PhotoViewComputedScale.contained * 1,
+              minScale: PhotoViewComputedScale.contained * 1,
+              maxScale: PhotoViewComputedScale.contained * 5,
+              heroAttributes:
+                  PhotoViewHeroAttributes(tag: widget.links[index]['link']),
+              onTapUp: (context, details, value) {
+                showImg(
+                    widget.links[index]['title'], widget.links[index]['link']);
+              },
+            );
+          },
+          onPageChanged: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+          pageController: PageController(initialPage: currentIndex),
+        ),
       ),
     );
   }

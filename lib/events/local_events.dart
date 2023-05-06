@@ -17,8 +17,8 @@ class _localEventsState extends State<localEvents> {
   List events = [];
 
   void getData() async {
-    Response response =
-        await get(Uri.parse('https://api.npoint.io/f0be36c0998477543644'));
+    Response response = await get(Uri.parse(
+        'https://api.jsonbin.io/v3/b/64561adcb89b1e2299981254?meta=false'));
     Map info = jsonDecode(response.body);
     List local = info['Local'];
     setState(() {
@@ -40,13 +40,13 @@ class _localEventsState extends State<localEvents> {
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 3),
             child: Text(
-              "${events['event name']}:",
+              "${events['event_name']}:",
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 3),
-            child: Text('${events['dis']}'),
+            child: Text('${events['description']}'),
           ),
         ],
       ),
