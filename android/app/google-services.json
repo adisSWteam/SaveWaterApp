@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "870214579138-at51g77t6hd6psnjnqea8vkn8rgfoo98.apps.googleusercontent.com",
+          "client_id": "870214579138-l4fplqrfpe4taf6p80dntjfgumpv4tof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.adis.save_water",
+            "certificate_hash": "ca47e9e02c778255eb425e68b4bfbdebffafbac5"
+          }
+        },
+        {
+          "client_id": "870214579138-lfm9vji7s190hjvvr0h6hpv4ubrc1lrk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

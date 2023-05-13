@@ -6,14 +6,14 @@ import 'dart:convert';
 
 import 'package:save_water/theme/theme.dart';
 
-class interEvents extends StatefulWidget {
-  const interEvents({Key? key}) : super(key: key);
+class InterEvents extends StatefulWidget {
+  const InterEvents({Key? key}) : super(key: key);
 
   @override
-  State<interEvents> createState() => _interEventsState();
+  State<InterEvents> createState() => _InterEventsState();
 }
 
-class _interEventsState extends State<interEvents> {
+class _InterEventsState extends State<InterEvents> {
   List events = [];
 
   void getData() async {
@@ -32,21 +32,26 @@ class _interEventsState extends State<interEvents> {
     WidgetsBinding.instance.addPostFrameCallback((_) => getData());
   }
 
-  Widget display(events) {
+  Widget display(Map event) {
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          Image.network(
+            event['image_url'],
+            fit: BoxFit.cover,
+            height: 200.0,
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 3),
             child: Text(
-              "${events['event_name']}:",
+              "${event['event_name']}:",
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 3),
-            child: Text('${events['description']}'),
+            child: Text('${event['description']}'),
           ),
         ],
       ),
@@ -63,8 +68,11 @@ class _interEventsState extends State<interEvents> {
           backgroundColor: primaryColor,
           centerTitle: true,
         ),
-        body: Column(
-          children: events.map((e) => display(e)).toList(),
+        body: ListView.builder(
+          itemCount: events.length,
+          itemBuilder: (context, index) {
+            return display(events[index]);
+          },
         ));
   }
 }

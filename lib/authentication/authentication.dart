@@ -74,8 +74,6 @@ class Authentication extends StatelessWidget {
             // (action)
             providerConfigs: const [
               EmailProviderConfiguration(),
-              // GoogleProviderConfiguration( clientId:
-              //         "513276060408-odpfvef200ip2qhiiliuak78vsb1thgj.apps.googleusercontent.com")
             ]
             // : const [EmailProviderConfiguration()]),
             ));

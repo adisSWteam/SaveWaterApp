@@ -6,14 +6,14 @@ import 'dart:convert';
 
 import 'package:save_water/theme/theme.dart';
 
-class localEvents extends StatefulWidget {
-  const localEvents({Key? key}) : super(key: key);
+class LocalEvents extends StatefulWidget {
+  const LocalEvents({Key? key}) : super(key: key);
 
   @override
-  State<localEvents> createState() => _localEventsState();
+  State<LocalEvents> createState() => _LocalEventsState();
 }
 
-class _localEventsState extends State<localEvents> {
+class _LocalEventsState extends State<LocalEvents> {
   List events = [];
 
   void getData() async {
@@ -32,21 +32,26 @@ class _localEventsState extends State<localEvents> {
     WidgetsBinding.instance.addPostFrameCallback((_) => getData());
   }
 
-  Widget display(events) {
+  Widget display(Map event) {
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          Image.network(
+            event['image_url'],
+            fit: BoxFit.cover,
+            height: 200.0,
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 3),
             child: Text(
-              "${events['event_name']}:",
+              "${event['event_name']}:",
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 3),
-            child: Text('${events['description']}'),
+            child: Text('${event['description']}'),
           ),
         ],
       ),
@@ -63,8 +68,11 @@ class _localEventsState extends State<localEvents> {
           backgroundColor: primaryColor,
           centerTitle: true,
         ),
-        body: Column(
-          children: events.map((e) => display(e)).toList(),
+        body: ListView.builder(
+          itemCount: events.length,
+          itemBuilder: (context, index) {
+            return display(events[index]);
+          },
         ));
   }
 }
