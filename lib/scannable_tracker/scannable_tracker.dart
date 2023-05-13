@@ -150,35 +150,35 @@ class _ScannableTrackerState extends State<ScannableTracker> {
     if (find.isEmpty) {
       await water.insertOne({
         'uid': uid,
-        'result': [
+        'monthresult': [
           [(result).round(), date]
         ]
       });
     } else {
-      //List us = await water.find({'uid': uid}).toList();
-      List waterUseList = find[0]['result'];
-      List newAdd = [];
+      List<dynamic>? waterUseList = find[0]['monthresult'];
+      // ignore: prefer_conditional_assignment
+      if (waterUseList == null) {
+        waterUseList = [];
+      }
       bool dateEx = false;
-
       for (int j = 0; j < waterUseList.length; j++) {
         if (waterUseList[j][1] == date) {
           dateEx = true;
         }
       }
-      if (dateEx == false) {
+      if (!dateEx) {
         waterUseList.add([(result * 3.785).round(), date]);
         await water.updateOne(mongo.where.eq('uid', uid),
-            mongo.modify.set('result', waterUseList));
+            mongo.modify.set('monthresult', waterUseList));
       } else {
         for (int i = 0; i < waterUseList.length; i++) {
           if (waterUseList[i][1] == date) {
-            newAdd.add([(result).round(), date]);
-          } else {
-            newAdd.add(waterUseList[i]);
+            waterUseList[i][0] += (result * 3.785).round();
+            await water.updateOne(mongo.where.eq('uid', uid),
+                mongo.modify.set('monthresult', waterUseList));
+            break;
           }
         }
-        await water.updateOne(
-            mongo.where.eq('uid', uid), mongo.modify.set('result', newAdd));
       }
     }
   }

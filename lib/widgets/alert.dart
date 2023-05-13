@@ -1,16 +1,19 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-Widget alert({info, details, cont}) {
-  return CupertinoAlertDialog(
-    title: const Text('Error'),
-    content: const Text('Please choose an option'),
+Widget alert(
+    {required String title,
+    required String content,
+    required BuildContext context}) {
+  return AlertDialog(
+    title: Text(title),
+    content: Text(content),
     actions: [
-      CupertinoDialogAction(
+      TextButton(
         child: const Text('Ok'),
         onPressed: () {
-          Navigator.of(cont).pop();
+          Navigator.of(context).pop();
         },
-      )
+      ),
     ],
   );
 }

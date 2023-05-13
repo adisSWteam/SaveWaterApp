@@ -55,7 +55,7 @@ class ImageCard extends StatelessWidget {
           child: Text(
             description,
             style: const TextStyle(
-                fontSize: 12,
+                fontSize: 10,
                 color: Colors.black54,
                 fontWeight: FontWeight.w500),
           ),

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:save_water/theme/theme.dart';
 import 'package:save_water/widgets/image_card.dart';
+import 'package:connectivity/connectivity.dart';
 
 class eventMenu extends StatefulWidget {
   const eventMenu({Key? key}) : super(key: key);
@@ -12,12 +13,29 @@ class eventMenu extends StatefulWidget {
 }
 
 class _eventMenuState extends State<eventMenu> {
+  bool _buttonsEnabled = true;
+
+  @override
+  void initState() {
+    super.initState();
+    checkConnectivity();
+  }
+
+  Future<void> checkConnectivity() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        _buttonsEnabled = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Upcoming Events',
+            'Events',
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),
           ),
@@ -30,18 +48,23 @@ class _eventMenuState extends State<eventMenu> {
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/home/event/international');
-                    },
+                    onTap: _buttonsEnabled
+                        ? () {
+                            Navigator.pushNamed(
+                                context, '/home/event/international');
+                          }
+                        : null,
                     child: const ImageCard(
                       title: 'International Events',
                       description: 'Events happening all over the world',
                       image: AssetImage('assets/images/intl_event.png'),
                     )),
                 InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/home/event/local');
-                    },
+                    onTap: _buttonsEnabled
+                        ? () {
+                            Navigator.pushNamed(context, '/home/event/local');
+                          }
+                        : null,
                     child: const ImageCard(
                       title: 'Local Events',
                       description:
@@ -49,9 +72,11 @@ class _eventMenuState extends State<eventMenu> {
                       image: AssetImage('assets/images/local_event.png'),
                     )),
                 InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/home/gallery');
-                  },
+                  onTap: _buttonsEnabled
+                      ? () {
+                          Navigator.pushNamed(context, '/home/gallery');
+                        }
+                      : null,
                   child: const ImageCard(
                     title: "Gallery",
                     description: "A collection of fond memories.",

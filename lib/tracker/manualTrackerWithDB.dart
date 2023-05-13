@@ -349,7 +349,7 @@ class _manualReworkState extends State<manualRework> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    ResultPage(result_: result)),
+                                    ResultPage(result: result)),
                             (route) => route.isFirst);
                       }
                       opChosen = 4;
@@ -357,9 +357,9 @@ class _manualReworkState extends State<manualRework> {
                       showDialog(
                           context: context,
                           builder: (context) => alert(
-                              info: 'Error',
-                              details: 'Choose an Option',
-                              cont: context));
+                              title: 'Error',
+                              content: 'Choose an Option',
+                              context: context));
                     }
                   });
                 },
@@ -390,97 +390,109 @@ class _manualReworkState extends State<manualRework> {
 }
 
 class ResultPage extends StatelessWidget {
-  final double result_;
+  final double result;
 
-  const ResultPage({Key? key, required this.result_}) : super(key: key);
-
-  String overunder() {
-    if (result_ > 114) {
-      return "❌ You are over the average";
-    } else {
-      return "✔ Good Job. Your water usage is controlled";
-    }
-  }
+  const ResultPage({Key? key, required this.result}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: const Text('Tracker'),
-          centerTitle: true,
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Center(
-                child: Image.asset(
-              'assets/ind_assets/whale.png',
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Water Tracker'),
+        centerTitle: true,
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Center(
+            child: Image.asset(
+              'assets/ind_assets/drop_hold.png',
               height: 100,
               width: 100,
               fit: BoxFit.contain,
-            )),
-            Center(
-                child: Padding(
-              padding: const EdgeInsets.all(14),
-              child: Column(
-                children: [
-                  const Text(
-                    'Your approximate',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.lightBlueAccent,
-                        fontFamily: 'Proxima-Nova'),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Column(
+              children: [
+                const Text(
+                  'Your approximate water footprint is',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'water footprint is',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.lightBlueAccent,
-                        fontFamily: 'Proxima-Nova'),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  '${(result * 3.785).round()} liters per day',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.lightBlueAccent,
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '${(result_ * 3.785).round()} Liters per day',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 30,
-                      color: Colors.lightBlueAccent,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  '${result.round()} gallons per day',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.lightBlueAccent,
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'or',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Proxima-Nova',
-                        color: Colors.lightBlueAccent),
+                ),
+                const SizedBox(height: 32),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlueAccent.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '${result_.round()} Gallons per day',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 30,
-                        color: Colors.lightBlueAccent,
-                        fontWeight: FontWeight.bold),
+                  child: Column(
+                    children: const [
+                      Text(
+                        'Ways to save water',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.lightBlueAccent,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        '1. Fix leaky faucets',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Text(
+                        '2. Install water-efficient showerheads',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Text(
+                        '3. Use a bucket to catch shower water and reuse it for plants or cleaning',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Text(
+                        '4. Run washing machines and dishwashers only when full',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Text(
+                        '5. Reduce your shower time',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )),
-            Text(overunder()),
-            const SizedBox(height: 25),
-            const Image(
-              image: AssetImage('assets/ind_assets/drop_hold.png'),
-              height: 100,
-              width: 100,
-            )
-          ],
-        ));
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

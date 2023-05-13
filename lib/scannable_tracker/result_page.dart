@@ -8,6 +8,7 @@ class ScanTrackerResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool overAverage = int.parse(scannedText) > 27000;
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -19,57 +20,71 @@ class ScanTrackerResultPage extends StatelessWidget {
           backgroundColor: primaryColor,
           centerTitle: true,
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Center(
-                child: Image.asset(
-              'assets/ind_assets/whale.png',
-              height: 100,
-              width: 100,
-              fit: BoxFit.contain,
-            )),
-            Center(
-                child: Padding(
-              padding: const EdgeInsets.all(14),
-              child: Column(
-                children: [
-                  const Text(
-                    'Total litres of water',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.lightBlueAccent,
-                        fontFamily: 'Proxima-Nova'),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'used this month is:',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.lightBlueAccent,
-                        fontFamily: 'Proxima-Nova'),
-                  ),
-                  const SizedBox(height: 8),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const SizedBox(height: 20),
+              const SizedBox(height: 20),
+              const Text(
+                'Total litres of water used this month:',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.lightBlueAccent,
+                    fontFamily: 'Proxima-Nova',
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                "$scannedText litres",
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 48,
+                  color: Colors.lightBlueAccent,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 32),
+              Image.asset(
+                'assets/ind_assets/drop_hold.png',
+                height: 30,
+                width: 30,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(height: 32),
+              Text(
+                overAverage
+                    ? 'You are over the average'
+                    : 'Good Job. Your water usage is controlled',
+                style: const TextStyle(fontSize: 20.0),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 35),
+              const Text(
+                'Tips to Save Water:',
+                style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.lightBlueAccent,
+                    fontFamily: 'Proxima-Nova',
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const <Widget>[
+                  SizedBox(height: 0.0),
+                  SizedBox(height: 16.0),
                   Text(
-                    "$scannedText litres",
+                    '1. Fix leaky faucets and pipes.\n 2. Take shorter showers.\n 3. Use a broom instead of a hose to clean driveways and sidewalks.\n 4. Install a low-flow toilet.\n 5. Water your lawn only when it needs it.\n',
+                    style: TextStyle(fontSize: 16.5),
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 30,
-                      color: Colors.lightBlueAccent,
-                      fontWeight: FontWeight.bold,
-                    ),
                   ),
                 ],
               ),
-            )),
-            const Image(
-              image: AssetImage('assets/ind_assets/drop_hold.png'),
-              height: 100,
-              width: 100,
-            )
-          ],
+            ],
+          ),
         ));
   }
 }

@@ -26,39 +26,46 @@ class _StartState extends State<Start> {
       body: Container(
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/waterbg.png'),
-                fit: BoxFit.cover)),
+          image: DecorationImage(
+            image: AssetImage('assets/images/waterbg.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Stack(
           children: <Widget>[
             Align(
-                alignment: const AlignmentDirectional(0.85, -0.8),
-                child: Image.asset(
-                  'assets/images/waterdrop.png',
-                  height: 100,
-                )),
+              alignment: const AlignmentDirectional(0.85, -0.8),
+              child: Image.asset(
+                'assets/images/waterdrop.png',
+                height: 100,
+              ),
+            ),
             const Align(
               alignment: AlignmentDirectional(0, 0),
               child: Text(
                 'Welcome!',
                 style: TextStyle(
-                    fontSize: 60,
-                    letterSpacing: 2.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                  fontSize: 60,
+                  letterSpacing: 2.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const Align(
               alignment: AlignmentDirectional(0.07, 0.52),
               child: Text(
                 'HOLD THAT DROP',
-                style: TextStyle(fontSize: 25, color: Colors.white),
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
               ),
             ),
             const Align(
               alignment: AlignmentDirectional(0.02, 0.61),
               child: Text(
-                'An Intiative By',
+                'An Initiative By',
                 style: TextStyle(
                   color: Color(0xFF40DBFF),
                 ),
@@ -68,9 +75,13 @@ class _StartState extends State<Start> {
               alignment: AlignmentDirectional(0, 0.7),
               child: Text(
                 'Abu Dhabi Indian School, Al Muroor',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

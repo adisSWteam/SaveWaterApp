@@ -48,6 +48,8 @@ dependencies:
   mongo_dart: ^0.9.1
   intl: ^0.17.0
   photo_view: ^0.14.0
+  delete_un_used_assets: ^1.0.1
+  connectivity: ^3.0.6
 
 dev_dependencies:
   flutter_lints: ^2.0.1
@@ -71,10 +73,6 @@ flutter:
   assets:
     - assets/images/
     - assets/ind_assets/
-    - assets/ind_assets/shower_2.png
-    - assets/ind_assets/faucet .png
-    - assets/ind_assets/dish_wash.png
-    - assets/ind_assets/dish_wash.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
