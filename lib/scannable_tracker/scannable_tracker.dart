@@ -9,6 +9,7 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:save_water/scannable_tracker/month_history.dart';
+import 'package:connectivity/connectivity.dart';
 
 class ScannableTracker extends StatefulWidget {
   const ScannableTracker({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class _ScannableTrackerState extends State<ScannableTracker> {
   XFile? imageFile;
   String scannedText = "";
   final uid = FirebaseAuth.instance.currentUser!.uid;
+  bool _hasInternetConnection = true;
 
   void button1OnPressed() {
     getImage(ImageSource.gallery);
@@ -31,9 +33,39 @@ class _ScannableTrackerState extends State<ScannableTracker> {
     getImage(ImageSource.camera);
   }
 
-  void button3OnPressed() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const MonthHistory()));
+  void button3OnPressed() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      setState(() {
+        _hasInternetConnection = false;
+      });
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('No Internet Connection'),
+            content: const Text(
+                'Your data from manual & scan tracker will not be recorded in the database. You won\'t be able to access history, gallery & local/international events pages.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      setState(() {
+        _hasInternetConnection = true;
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const MonthHistory()),
+      );
+    }
   }
 
   @override
@@ -86,13 +118,16 @@ class _ScannableTrackerState extends State<ScannableTracker> {
               ],
             ),
             const SizedBox(height: 30),
-            InkWell(
-              onTap: button3OnPressed,
-              child: Ink.image(
-                image: const AssetImage("assets/ind_assets/monthHistory.png"),
-                height: 250,
-                width: 250,
-                fit: BoxFit.cover,
+            AbsorbPointer(
+              absorbing: !_hasInternetConnection,
+              child: InkWell(
+                onTap: button3OnPressed,
+                child: Ink.image(
+                  image: const AssetImage("assets/ind_assets/monthHistory.png"),
+                  height: 250,
+                  width: 250,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ],

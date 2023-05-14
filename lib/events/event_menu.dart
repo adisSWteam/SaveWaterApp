@@ -27,6 +27,25 @@ class _eventMenuState extends State<eventMenu> {
       setState(() {
         _buttonsEnabled = false;
       });
+      // ignore: use_build_context_synchronously
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("No Internet Connection"),
+            content: const Text(
+                "Your data from Manual & Scan Tracker will not be recorded in the database. You won't be able to access History, Gallery & Local/International Events pages."),
+            actions: <Widget>[
+              TextButton(
+                child: const Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 

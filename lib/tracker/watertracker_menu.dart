@@ -11,12 +11,12 @@ class WaterMenu extends StatefulWidget {
 }
 
 class _WaterMenuState extends State<WaterMenu> {
-  bool _isConnected = true; // added to track internet connection status
+  bool _isConnected = true;
 
   @override
   void initState() {
     super.initState();
-    _checkConnectivity(); // check internet connection status on init
+    _checkConnectivity();
   }
 
   void _checkConnectivity() async {
@@ -26,6 +26,24 @@ class _WaterMenuState extends State<WaterMenu> {
         _isConnected = false;
       });
     }
+  }
+
+  void _showNoInternetPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('No Internet Connection'),
+        content: const Text(
+          'Your data from Manual & Scan Tracker will not be recorded in the database. You won\'t be able to access History, Gallery & Local/International Events pages.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -83,11 +101,14 @@ class _WaterMenuState extends State<WaterMenu> {
             ),
             Expanded(
               child: IgnorePointer(
-                ignoring:
-                    !_isConnected, // disable the button if there's no internet connection
+                ignoring: !_isConnected,
                 child: InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, '/home/water/history');
+                    if (_isConnected) {
+                      Navigator.pushNamed(context, '/home/water/history');
+                    } else {
+                      _showNoInternetPopup(context);
+                    }
                   },
                   child: const ImageCard(
                     title: 'History',
