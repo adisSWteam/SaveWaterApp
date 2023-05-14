@@ -8,6 +8,7 @@ import 'package:save_water/scannable_tracker/result_page.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:save_water/scannable_tracker/month_history.dart';
 
 class ScannableTracker extends StatefulWidget {
   const ScannableTracker({Key? key}) : super(key: key);
@@ -30,6 +31,11 @@ class _ScannableTrackerState extends State<ScannableTracker> {
     getImage(ImageSource.camera);
   }
 
+  void button3OnPressed() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const MonthHistory()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,48 +49,55 @@ class _ScannableTrackerState extends State<ScannableTracker> {
         centerTitle: true,
       ),
       body: Center(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (textScanning) const CircularProgressIndicator(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Choose from gallery button
-
-              InkWell(
-                onTap: () {
-                  getImage(ImageSource.gallery);
-                },
-                child: Ink.image(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (textScanning) const CircularProgressIndicator(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                  onTap: () {
+                    getImage(ImageSource.gallery);
+                  },
+                  child: Ink.image(
                     image: const AssetImage(
                       "assets/ind_assets/upload_from_gallery.png",
                     ),
                     height: 260,
                     width: 175,
-                    fit: BoxFit.cover),
-              ),
-              // Choose from camera button
-              InkWell(
-                onTap: () {
-                  getImage(ImageSource.camera);
-                },
-                child: Ink.image(
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    getImage(ImageSource.camera);
+                  },
+                  child: Ink.image(
                     image: const AssetImage(
                       "assets/ind_assets/take_photo.png",
                     ),
                     height: 260,
                     width: 175,
-                    fit: BoxFit.cover),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            InkWell(
+              onTap: button3OnPressed,
+              child: Ink.image(
+                image: const AssetImage("assets/ind_assets/monthHistory.png"),
+                height: 250,
+                width: 250,
+                fit: BoxFit.cover,
               ),
-            ],
-          ),
-          const SizedBox(
-            height: 160,
-          ),
-        ],
-      )),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
