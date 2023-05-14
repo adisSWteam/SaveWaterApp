@@ -180,13 +180,15 @@ class _ScannableTrackerState extends State<ScannableTracker> {
         }
       }
       if (!dateEx) {
-        waterUseList.add([(result * 3.785).round(), date]);
+        //waterUseList.add([(result * 3.785).round(), date]);
+        waterUseList.add([(result).round(), date]);
         await water.updateOne(mongo.where.eq('uid', uid),
             mongo.modify.set('monthresult', waterUseList));
       } else {
         for (int i = 0; i < waterUseList.length; i++) {
           if (waterUseList[i][1] == date) {
-            waterUseList[i][0] += (result * 3.785).round();
+            waterUseList[i][0] += (result).round();
+            //waterUseList[i][0] += (result * 3.785).round();
             await water.updateOne(mongo.where.eq('uid', uid),
                 mongo.modify.set('monthresult', waterUseList));
             break;
