@@ -11,12 +11,12 @@ class WaterMenu extends StatefulWidget {
 }
 
 class _WaterMenuState extends State<WaterMenu> {
-  bool _isConnected = true;
+  bool _isConnected = true; // added to track internet connection status
 
   @override
   void initState() {
     super.initState();
-    _checkConnectivity();
+    _checkConnectivity(); // check internet connection status on init
   }
 
   void _checkConnectivity() async {
@@ -31,18 +31,21 @@ class _WaterMenuState extends State<WaterMenu> {
   void _showNoInternetPopup(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('No Internet Connection'),
-        content: const Text(
-          'Your data from Manual & Scan Tracker will not be recorded in the database. You won\'t be able to access History, Gallery & Local/International Events pages.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('OK'),
-          ),
-        ],
-      ),
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('No Internet Connection'),
+          content: const Text(
+              'Your data from Manual & Scan Tracker will not be recorded in the database. You won\'t be able to access History, Gallery & Local/International Events pages.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -101,13 +104,15 @@ class _WaterMenuState extends State<WaterMenu> {
             ),
             Expanded(
               child: IgnorePointer(
-                ignoring: !_isConnected,
+                ignoring:
+                    !_isConnected, // disable the button if there's no internet connection
                 child: InkWell(
                   onTap: () {
-                    if (_isConnected) {
-                      Navigator.pushNamed(context, '/home/water/history');
+                    if (!_isConnected) {
+                      _showNoInternetPopup(
+                          context); // show popup if there's no internet connection
                     } else {
-                      _showNoInternetPopup(context);
+                      Navigator.pushNamed(context, '/home/water/history');
                     }
                   },
                   child: const ImageCard(
