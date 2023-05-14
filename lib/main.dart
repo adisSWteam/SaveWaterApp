@@ -24,6 +24,16 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   FirebaseMessaging.onBackgroundMessage(_firebasePushHandler);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    // ignore: avoid_print
+    print("Message from Push Notification is ${message.data}");
+    AwesomeNotifications().createNotificationFromJsonData(message.data);
+  });
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    // ignore: avoid_print
+    print("Message from Push Notification is ${message.data}");
+    AwesomeNotifications().createNotificationFromJsonData(message.data);
+  });
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
