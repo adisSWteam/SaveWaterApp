@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter/services.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:save_water/authentication/auth_gate.dart';
 import 'package:save_water/home/start_page.dart';
@@ -21,11 +23,24 @@ import 'package:save_water/theme/theme.dart';
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  FirebaseMessaging.onBackgroundMessage(_firebasePushHandler);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  AwesomeNotifications().initialize(
+    null,
+    [
+      NotificationChannel(
+          channelName: 'ADIS Save Water',
+          channelKey: 'adis_swa',
+          channelDescription: 'Notification channel for Save Water App',
+          playSound: true,
+          enableVibration: true,
+          enableLights: true),
+    ],
+    debug: true,
+  );
   FlutterNativeSplash.remove();
 
   return runApp(
@@ -47,4 +62,11 @@ Future<void> main() async {
       color: primaryColor,
     ),
   );
+}
+
+// ignore: no_leading_underscores_for_local_identifiers
+Future<void> _firebasePushHandler(RemoteMessage message) async {
+  // ignore: avoid_print
+  print("Message from Push Notification is ${message.data}");
+  AwesomeNotifications().createNotificationFromJsonData(message.data);
 }
