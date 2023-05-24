@@ -3,6 +3,7 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:save_water/theme/theme.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class History extends StatefulWidget {
   const History({Key? key}) : super(key: key);
@@ -16,8 +17,7 @@ class _HistoryState extends State<History> {
   List results = [];
 
   void getData() async {
-    mongo.Db db = await mongo.Db.create(
-        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
+    mongo.Db db = await mongo.Db.create(dotenv.env['DB_URL']!);
     await db.open();
     final water = db.collection('waterData');
     final find = await water.find({"uid": uid}).toList();

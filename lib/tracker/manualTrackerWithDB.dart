@@ -6,6 +6,7 @@ import 'package:save_water/widgets/alert.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class manualRework extends StatefulWidget {
   const manualRework({Key? key}) : super(key: key);
@@ -18,18 +19,16 @@ class _manualReworkState extends State<manualRework> {
   final uid = FirebaseAuth.instance.currentUser!.uid;
 
   void dataBaseConnect() async {
-    mongo.Db db = await mongo.Db.create(
-        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
+    mongo.Db db = await mongo.Db.create(dotenv.env['DB_URL']!);
     await db.open();
     final water = db.collection('waterData');
-    //print(await water.find({'name': 'Ballz'}).toList());
     List find = await water.find({'name': 'Austin'}).toList();
     if (find.isEmpty) {}
   }
 
   void dataBaseAdd(double result) async {
     mongo.Db db = await mongo.Db.create(
-        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
+        dotenv.env['DB_URL']!);
     await db.open();
     final water = db.collection('waterData');
     final find = await water.find({"uid": uid}).toList();
@@ -43,7 +42,6 @@ class _manualReworkState extends State<manualRework> {
         ]
       });
     } else {
-      //List us = await water.find({'uid': uid}).toList();
       List waterUseList = find[0]['result'];
       List newAdd = [];
       bool dateEx = false;
@@ -74,7 +72,6 @@ class _manualReworkState extends State<manualRework> {
   @override
   void initState() {
     super.initState();
-    //dataBaseConnect();
   }
 
   List<Question> questions = [

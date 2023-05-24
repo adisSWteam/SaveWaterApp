@@ -37,8 +37,6 @@ class _AuthGateState extends State<AuthGate> {
           return const Authentication();
         }
 
-        // Render application if signed in
-        // return HomePage(user: snapshot.data!);
         if (homeState == false) {
           return thanks(
             user: snapshot.data!,

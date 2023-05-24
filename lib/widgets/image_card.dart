@@ -25,8 +25,6 @@ class ImageCard extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         ClipRRect(
           borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
-
-          // Image
           child: Image(
             image: image,
             height: 120,
@@ -36,8 +34,6 @@ class ImageCard extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(12, 4, 12, 4),
-
-          // Title
           child: Text(
             title,
             style: const TextStyle(
@@ -50,8 +46,6 @@ class ImageCard extends StatelessWidget {
         const Divider(indent: 10, endIndent: 10, height: 2),
         Padding(
           padding: const EdgeInsets.fromLTRB(12, 4, 12, 4),
-
-          // Description
           child: Text(
             description,
             style: const TextStyle(

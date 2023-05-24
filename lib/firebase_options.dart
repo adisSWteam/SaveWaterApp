@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '870214579138',
     projectId: 'adis-savewaterapp',
     storageBucket: 'adis-savewaterapp.appspot.com',
-    iosClientId: '870214579138-csfuf0msrcglagb1pists3mmepu8l3cg.apps.googleusercontent.com',
+    iosClientId:
+        '870214579138-csfuf0msrcglagb1pists3mmepu8l3cg.apps.googleusercontent.com',
     iosBundleId: 'com.example.saveWater',
   );
 }

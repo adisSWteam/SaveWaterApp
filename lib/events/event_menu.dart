@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:save_water/theme/theme.dart';
@@ -27,7 +27,6 @@ class _eventMenuState extends State<eventMenu> {
       setState(() {
         _buttonsEnabled = false;
       });
-      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (BuildContext context) {

@@ -11,12 +11,12 @@ class WaterMenu extends StatefulWidget {
 }
 
 class _WaterMenuState extends State<WaterMenu> {
-  bool _isConnected = true; // added to track internet connection status
+  bool _isConnected = true;
 
   @override
   void initState() {
     super.initState();
-    _checkConnectivity(); // check internet connection status on init
+    _checkConnectivity();
   }
 
   void _checkConnectivity() async {
@@ -104,13 +104,11 @@ class _WaterMenuState extends State<WaterMenu> {
             ),
             Expanded(
               child: IgnorePointer(
-                ignoring:
-                    !_isConnected, // disable the button if there's no internet connection
+                ignoring: !_isConnected,
                 child: InkWell(
                   onTap: () {
                     if (!_isConnected) {
-                      _showNoInternetPopup(
-                          context); // show popup if there's no internet connection
+                      _showNoInternetPopup(context);
                     } else {
                       Navigator.pushNamed(context, '/home/water/history');
                     }

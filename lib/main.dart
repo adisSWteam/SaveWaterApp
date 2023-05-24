@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter/services.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:save_water/authentication/auth_gate.dart';
 import 'package:save_water/home/start_page.dart';
@@ -25,12 +28,10 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   FirebaseMessaging.onBackgroundMessage(_firebasePushHandler);
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    // ignore: avoid_print
     print("Message from Push Notification is ${message.data}");
     AwesomeNotifications().createNotificationFromJsonData(message.data);
   });
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    // ignore: avoid_print
     print("Message from Push Notification is ${message.data}");
     AwesomeNotifications().createNotificationFromJsonData(message.data);
   });
@@ -51,6 +52,7 @@ Future<void> main() async {
     ],
     debug: true,
   );
+  await dotenv.load(fileName: ".env");
   FlutterNativeSplash.remove();
 
   return runApp(
@@ -74,9 +76,7 @@ Future<void> main() async {
   );
 }
 
-// ignore: no_leading_underscores_for_local_identifiers
 Future<void> _firebasePushHandler(RemoteMessage message) async {
-  // ignore: avoid_print
   print("Message from Push Notification is ${message.data}");
   AwesomeNotifications().createNotificationFromJsonData(message.data);
 }

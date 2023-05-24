@@ -105,13 +105,11 @@ class _MainShowState extends State<MainShow> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          //title: Text(title),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(title),
               SizedBox(height: 5.0),
-              //Image.network(link),
             ],
           ),
         );

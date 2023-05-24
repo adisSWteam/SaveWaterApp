@@ -46,7 +46,6 @@ class thanks extends StatelessWidget {
                 fit: BoxFit.cover)),
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
-          //debug stuff delete after use
           child: Center(
             child: Column(
               children: <Widget>[

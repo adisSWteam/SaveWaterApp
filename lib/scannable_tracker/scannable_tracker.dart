@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart' as google_ml_kit;
@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:save_water/scannable_tracker/month_history.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ScannableTracker extends StatefulWidget {
   const ScannableTracker({Key? key}) : super(key: key);
@@ -137,7 +138,6 @@ class _ScannableTrackerState extends State<ScannableTracker> {
   }
 
   void processImage() {
-    // ignore: unused_local_variable
     for (var word in scannedText.runes) {}
   }
 
@@ -188,8 +188,7 @@ class _ScannableTrackerState extends State<ScannableTracker> {
   }
 
   void dataBaseAdd(double result) async {
-    mongo.Db db = await mongo.Db.create(
-        'mongodb+srv://savewater:savewater123@savewater.tfctjml.mongodb.net/waterData?retryWrites=true&w=majority');
+    mongo.Db db = await mongo.Db.create(dotenv.env['DB_URL']!);
     await db.open();
     final water = db.collection('waterData');
     final find = await water.find({"uid": uid}).toList();
@@ -215,7 +214,6 @@ class _ScannableTrackerState extends State<ScannableTracker> {
         }
       }
       if (!dateEx) {
-        //waterUseList.add([(result * 3.785).round(), date]);
         waterUseList.add([(result).round(), date]);
         await water.updateOne(mongo.where.eq('uid', uid),
             mongo.modify.set('monthresult', waterUseList));
@@ -223,7 +221,6 @@ class _ScannableTrackerState extends State<ScannableTracker> {
         for (int i = 0; i < waterUseList.length; i++) {
           if (waterUseList[i][1] == date) {
             waterUseList[i][0] += (result).round();
-            //waterUseList[i][0] += (result * 3.785).round();
             await water.updateOne(mongo.where.eq('uid', uid),
                 mongo.modify.set('monthresult', waterUseList));
             break;
