@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:save_water/theme/theme.dart';
 
@@ -20,8 +21,7 @@ class _GalleryState extends State<Gallery> {
   List links = [];
 
   void getData() async {
-    Response response = await get(Uri.parse(
-        'https://api.jsonbin.io/v3/b/645619dd8e4aa6225e976721?meta=false'));
+    Response response = await get(Uri.parse(dotenv.env['PHOTO_URL']!));
     List linkI = jsonDecode(response.body);
     setState(() {
       links = linkI;

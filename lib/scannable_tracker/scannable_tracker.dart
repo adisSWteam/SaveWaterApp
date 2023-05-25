@@ -192,7 +192,7 @@ class _ScannableTrackerState extends State<ScannableTracker> {
     await db.open();
     final water = db.collection('waterData');
     final find = await water.find({"uid": uid}).toList();
-    DateFormat dateFormat = DateFormat("dd-MM-yyyy, hh:mm a");
+    DateFormat dateFormat = DateFormat("MMMM");
     String date = dateFormat.format(DateTime.now());
     if (find.isEmpty) {
       await water.insertOne({

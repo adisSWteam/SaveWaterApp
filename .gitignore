@@ -45,5 +45,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# ENV File Containing MONGODB Server Credentials
+# ENV File Containing MongoDB Credentials, Gallery & Events JSON Page Links
 .env

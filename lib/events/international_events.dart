@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:save_water/theme/theme.dart';
 
@@ -17,8 +18,7 @@ class _InterEventsState extends State<InterEvents> {
   List events = [];
 
   void getData() async {
-    Response response = await get(Uri.parse(
-        'https://api.jsonbin.io/v3/b/64561adcb89b1e2299981254?meta=false'));
+    Response response = await get(Uri.parse(dotenv.env['EVENTS_URL']!));
     Map info = jsonDecode(response.body);
     List inter = info['Inter'];
     setState(() {
