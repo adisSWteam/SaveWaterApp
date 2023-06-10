@@ -64,7 +64,7 @@ class _MonthHistoryState extends State<MonthHistory> {
                     width: 10,
                   ),
                   Text(
-                    "${(res[0] / 3.785).round()} Gallons recorded on ${res[1]}",
+                    "${(res[0] / 3.785).round()} Gallons recorded in ${res[1]}",
                     style: const TextStyle(fontSize: 10.5),
                   ),
                 ],
